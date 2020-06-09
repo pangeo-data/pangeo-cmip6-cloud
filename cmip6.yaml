@@ -1,0 +1,38 @@
+Name: Coupled Model Intercomparison Project 6
+Description: Sixth phase of global coupled ocean-atmosphere general circulation model ensemble, formatted in Zarr
+Documentation: https://www.wcrp-climate.org/wgcm-cmip/wgcm-cmip6
+Contact: https://github.com/pangeo-data/pangeo-datastore/issues
+ManagedBy: [Pangeo](https://pangeo.io/)
+UpdateFrequency: New ensemble data is added as soon as it is available.
+Tags:
+  - atmosphere
+  - climate
+  - earth observation
+  - environmental
+  - model
+  - oceans
+  - simulations
+  - weather
+License:
+Resources: # skip for now
+  - Description:
+    ARN:
+    Region:
+    Type:
+DataAtWork: # skip for now
+  Tutorials:
+    - Title:
+      URL:
+      AuthorName:
+      AuthorURL:
+      Services:
+  Tools & Applications:
+    - Title:
+      URL:
+      AuthorName:
+      AuthorURL:
+  Publications:
+    - Title:
+      URL:
+      AuthorName:
+      AuthorURL:
