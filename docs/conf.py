@@ -13,11 +13,12 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+import sphinx_pangeo_theme
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'pangeo-cmip6-cloud'
+project = 'Pangeo CMIP6 Documentation'
 copyright = '2020, Pangeo Team'
 author = 'Pangeo Team'
 
@@ -44,7 +45,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'pangeo'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
