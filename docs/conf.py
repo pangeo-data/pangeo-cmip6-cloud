@@ -18,9 +18,9 @@ import sphinx_pangeo_theme
 
 # -- Project information -----------------------------------------------------
 
-project = 'Pangeo CMIP6 Documentation'
-copyright = '2020, Pangeo Team'
-author = 'Pangeo Team'
+project = 'Pangeo CMIP6'
+copyright = '2020, Pangeo'
+author = 'Pangeo'
 
 
 # -- General configuration ---------------------------------------------------
