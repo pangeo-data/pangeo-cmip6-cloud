@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pangeo CMIP6 &#8212; Pangeo CMIP6  documentation</title>
+    <link rel="stylesheet" href="_static/pangeo-style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Cloud Data Overview" href="overview.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <span><img src="_static/small_e_reversed_24px.png"></span>
+          Pangeo CMIP6</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Cloud Data Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#zarr-storage-format">Zarr Storage Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#directory-layout">Directory Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#structure-of-the-csv-file">Structure of the CSV File</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Pangeo CMIP6</a><ul>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="overview.html" title="Next Chapter: Cloud Data Overview"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Cloud Data Overview &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+            
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="pangeo-cmip6">
+<h1>Pangeo CMIP6<a class="headerlink" href="#pangeo-cmip6" title="Permalink to this headline">¶</a></h1>
+<p>This page will serve as a central hub for information on accessing and interacting with data from the Coupled Model Intercomparison Project Phase 6 (CMIP6) stored on Amazon Web Services (AWS) cloud storage, managed by Pangeo.
+This data is formatted using <a class="reference external" href="https://zarr.readthedocs.io/en/stable/">Zarr</a>, a cloud-optimized storage format.
+Interaction with the data is done primarily through Python, using <a class="reference external" href="https://intake.readthedocs.io/en/stable/">intake</a>, <a class="reference external" href="https://intake-esm.readthedocs.io/en/stable/">intake-esm</a>, and <a class="reference external" href="https://xarray.pydata.org/en/stable/">xarray</a>.</p>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>The Coupled Model Intercomparison Project (CMIP) is an international collaborative effort to improve the knowledge about climate change and its impacts on the Earth System and on our society.
+<a class="reference external" href="https://www.wcrp-climate.org/wgcm-cmip">CMIP began in 1995</a>, and today we are in its sixth phase (CMIP6).
+The CMIP6 data archive consists of data models created across approximately 30 working groups and 1,000 researchers investigating the urgent environmental problem of climate change, and will provide a wealth of information for the next Assessment Report (AR6) of the <a class="reference external" href="https://www.ipcc.ch/">Intergovernmental Panel on Climate Change</a> (IPCC).
+As part of the <a class="reference external" href="https://aws.amazon.com/opendata/public-datasets/">AWS Public Dataset Program</a>, this data will now be made available on AWS cloud storage.</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>Currently, the Zarr-formatted CMIP6 data is organized and accessed through an Earth System Model (ESM) collection, which can be opened and searched using intake-esm:</p>
+<p>Using intake-esm to open these datasets requires several other Python packages:</p>
+<ul class="simple">
+<li><p>intake, the base catalog package which intake-esm is a driver for</p></li>
+<li><p>xarray, which provides a container for the opened datasets</p></li>
+<li><p>zarr, to handle the backend of the individual datastores</p></li>
+</ul>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Cloud Data Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#zarr-storage-format">Zarr Storage Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#directory-layout">Directory Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#structure-of-the-csv-file">Structure of the CSV File</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2020, Pangeo.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
