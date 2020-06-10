@@ -15,7 +15,6 @@ Requirements
 ------------
 Currently, the Zarr-formatted CMIP6 data is organized and accessed through an Earth System Model (ESM) collection, which can be opened and searched using intake-esm:
 
-.. code-block:: python
   import intake
 
   col = intake.open_esm_datastore('https://storage.googleapis.com/cmip6/pangeo-cmip6.json')

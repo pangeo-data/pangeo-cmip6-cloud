@@ -125,6 +125,11 @@ As part of the <a class="reference external" href="https://aws.amazon.com/openda
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>Currently, the Zarr-formatted CMIP6 data is organized and accessed through an Earth System Model (ESM) collection, which can be opened and searched using intake-esm:</p>
+<blockquote>
+<div><p>import intake</p>
+<p>col = intake.open_esm_datastore(‘<a class="reference external" href="https://storage.googleapis.com/cmip6/pangeo-cmip6.json">https://storage.googleapis.com/cmip6/pangeo-cmip6.json</a>’)
+col</p>
+</div></blockquote>
 <p>Using intake-esm to open these datasets requires several other Python packages:</p>
 <ul class="simple">
 <li><p>intake, the base catalog package which intake-esm is a driver for</p></li>
