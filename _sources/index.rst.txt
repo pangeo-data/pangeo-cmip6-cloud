@@ -13,12 +13,12 @@ As part of the `AWS Public Dataset Program <https://aws.amazon.com/opendata/publ
 
 Requirements
 ------------
-Currently, the Zarr-formatted CMIP6 data is organized and accessed through an Earth System Model (ESM) collection, which can be opened and searched using intake-esm:
+Currently, the Zarr-formatted CMIP6 data is organized and accessed through an Earth System Model (ESM) collection, which can be opened and searched using intake-esm::
 
-  import intake
-
-  col = intake.open_esm_datastore('https://storage.googleapis.com/cmip6/pangeo-cmip6.json')
-  col
+    import intake
+    
+    col = intake.open_esm_datastore('https://storage.googleapis.com/cmip6/pangeo-cmip6.json')
+    col
 
 Using intake-esm to open these datasets requires several other Python packages:
 
