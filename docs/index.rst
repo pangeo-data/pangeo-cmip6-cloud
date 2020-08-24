@@ -7,9 +7,9 @@ Interaction with the data is done primarily through Python, using `intake <https
 Background
 ----------
 The Coupled Model Intercomparison Project (CMIP) is an international collaborative effort to improve the knowledge about climate change and its impacts on the Earth System and on our society.
-`CMIP began in 1995 <https://www.wcrp-climate.org/wgcm-cmip>`_, and today we are in its sixth phase (CMIP6).
+`CMIP began in 1995 <https://www.wcrp-climate.org/wgcm-cmip>`_, and is currently in its sixth phase (CMIP6).
 The CMIP6 data archive consists of data models created across approximately 30 working groups and 1,000 researchers investigating the urgent environmental problem of climate change, and will provide a wealth of information for the next Assessment Report (AR6) of the `Intergovernmental Panel on Climate Change <https://www.ipcc.ch/>`_ (IPCC).
-As part of the `AWS Public Dataset Program <https://aws.amazon.com/opendata/public-datasets/>`_, this data will now be made available on AWS cloud storage.
+As part of the `AWS Public Dataset Program <https://aws.amazon.com/opendata/public-datasets/>`_, this data is now available on S3 cloud storage.
 
 Requirements
 ------------
@@ -17,7 +17,7 @@ Currently, the Zarr-formatted CMIP6 data is organized and accessed through an Ea
 
     import intake
     
-    col = intake.open_esm_datastore('https://storage.googleapis.com/cmip6/pangeo-cmip6.json')
+    col = intake.open_esm_datastore("https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.json")
     col
 
 Using intake-esm to open these datasets requires several other Python packages:
