@@ -118,16 +118,16 @@ Interaction with the data is done primarily through Python, using <a class="refe
 <div class="section" id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <p>The Coupled Model Intercomparison Project (CMIP) is an international collaborative effort to improve the knowledge about climate change and its impacts on the Earth System and on our society.
-<a class="reference external" href="https://www.wcrp-climate.org/wgcm-cmip">CMIP began in 1995</a>, and today we are in its sixth phase (CMIP6).
+<a class="reference external" href="https://www.wcrp-climate.org/wgcm-cmip">CMIP began in 1995</a>, and is currently in its sixth phase (CMIP6).
 The CMIP6 data archive consists of data models created across approximately 30 working groups and 1,000 researchers investigating the urgent environmental problem of climate change, and will provide a wealth of information for the next Assessment Report (AR6) of the <a class="reference external" href="https://www.ipcc.ch/">Intergovernmental Panel on Climate Change</a> (IPCC).
-As part of the <a class="reference external" href="https://aws.amazon.com/opendata/public-datasets/">AWS Public Dataset Program</a>, this data will now be made available on AWS cloud storage.</p>
+As part of the <a class="reference external" href="https://aws.amazon.com/opendata/public-datasets/">AWS Public Dataset Program</a>, this data is now available on S3 cloud storage.</p>
 </div>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>Currently, the Zarr-formatted CMIP6 data is organized and accessed through an Earth System Model (ESM) collection, which can be opened and searched using intake-esm:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">intake</span>
 
-<span class="n">col</span> <span class="o">=</span> <span class="n">intake</span><span class="o">.</span><span class="n">open_esm_datastore</span><span class="p">(</span><span class="s1">&#39;https://storage.googleapis.com/cmip6/pangeo-cmip6.json&#39;</span><span class="p">)</span>
+<span class="n">col</span> <span class="o">=</span> <span class="n">intake</span><span class="o">.</span><span class="n">open_esm_datastore</span><span class="p">(</span><span class="s2">&quot;https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.json&quot;</span><span class="p">)</span>
 <span class="n">col</span>
 </pre></div>
 </div>
