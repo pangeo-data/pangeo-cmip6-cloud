@@ -16,7 +16,7 @@ Requirements
 Currently, the Zarr-formatted CMIP6 data is organized and accessed through an Earth System Model (ESM) collection, which can be opened and searched using intake-esm::
 
     import intake
-    
+
     col = intake.open_esm_datastore("https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.json")
     col
 
@@ -26,9 +26,15 @@ Using intake-esm to open these datasets requires several other Python packages:
 - xarray, which provides a container for the opened datasets
 - zarr, to handle the backend of the individual datastores
 
+Additionally, a filesystem library is required to access the files containing the datasets:
+
+- `gcsfs <https://gcsfs.readthedocs.io/en/latest/>`_ when accessing data in Google Cloud Storage
+- `s3fs <https://s3fs.readthedocs.io/en/latest/>`_ when accessing data in S3 Storage
+
 Documentation
 -------------
 .. toctree::
    :maxdepth: 2
 
    overview
+   accessing_data

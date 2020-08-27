@@ -60,6 +60,12 @@
 <li class="toctree-l2"><a class="reference internal" href="overview.html#structure-of-the-csv-file">Structure of the CSV File</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="accessing_data.html">Accessing Data in The Cloud</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="accessing_data.html#loading-an-esm-collection">Loading An ESM Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accessing_data.html#searching-for-datasets">Searching For Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accessing_data.html#loading-datasets">Loading Datasets</a></li>
+</ul>
+</li>
 </ul>
 </ul>
 </li>
@@ -137,6 +143,11 @@ As part of the <a class="reference external" href="https://aws.amazon.com/openda
 <li><p>xarray, which provides a container for the opened datasets</p></li>
 <li><p>zarr, to handle the backend of the individual datastores</p></li>
 </ul>
+<p>Additionally, a filesystem library is required to access the files containing the datasets:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gcsfs.readthedocs.io/en/latest/">gcsfs</a> when accessing data in Google Cloud Storage</p></li>
+<li><p><a class="reference external" href="https://s3fs.readthedocs.io/en/latest/">s3fs</a> when accessing data in S3 Storage</p></li>
+</ul>
 </div>
 <div class="section" id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
@@ -146,6 +157,12 @@ As part of the <a class="reference external" href="https://aws.amazon.com/openda
 <li class="toctree-l2"><a class="reference internal" href="overview.html#zarr-storage-format">Zarr Storage Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overview.html#directory-layout">Directory Layout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overview.html#structure-of-the-csv-file">Structure of the CSV File</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="accessing_data.html">Accessing Data in The Cloud</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="accessing_data.html#loading-an-esm-collection">Loading An ESM Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accessing_data.html#searching-for-datasets">Searching For Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accessing_data.html#loading-datasets">Loading Datasets</a></li>
 </ul>
 </li>
 </ul>
