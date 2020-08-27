@@ -9,7 +9,7 @@ Because of its Zarr format, individual CMIP6 data stores can be accessed using `
   ds = xr.open_zarr(path, consolidated=True) # make sure to specify that metadata is consolidated
 
 However, when working with multiple data stores at the same time, it is easier to access them using an Earth System Model (ESM) collection with with `intake-esm <https://intake-esm.readthedocs.io/en/stable/>`_.
-This allows the thousands of data stores to be searched and explored using the ` CMIP6 controlled vocabulary <https://github.com/WCRP-CMIP/CMIP6_CVs>`_.
+This allows the thousands of data stores to be searched and explored using the `CMIP6 controlled vocabulary <https://github.com/WCRP-CMIP/CMIP6_CVs>`_.
 When all relevant data stores have been discovered, they can then be merged and opening into an xarray container automatically, using information specified by the ESM collection.
 
 Loading An ESM Collection
@@ -33,13 +33,14 @@ In the example below, we will search for the following:
 
 - variables: ``tas`` which stands for near-surface air temperature
 - experiments: ``["historical", "ssp245", "ssp585"]``:
+
   - ``historical``: all forcing of the recent past
   - ``ssp245``: update of `RCP4.5 <https://en.wikipedia.org/wiki/Representative_Concentration_Pathway>`_ based on SSP2
   - ``ssp585``: emission-driven `RCP8.5 <https://en.wikipedia.org/wiki/Representative_Concentration_Pathway>`_ based on SSP5
-- table ID: ``Amon`` which stands for monthly atmospheric data
-- grid label: ``gr`` which stands for regridded data reported on the data provider's preferred target grid
 
-::
+- table ID: ``Amon`` which stands for monthly atmospheric data
+- grid label: ``gr`` which stands for regridded data reported on the data provider's preferred target grid::
+  
   # form query dictionary
   query = dict(experiment_id=['historical', 'ssp245', 'ssp585'],
                table_id='Amon',
