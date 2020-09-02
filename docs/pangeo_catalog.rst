@@ -6,7 +6,7 @@ In addition to offering various useful climate datasets in a consolidated locati
 Accessing catalogs using Python
 -------------------------------
 At the core of the project is a `GitHub repository <https://github.com/pangeo-data/pangeo-datastore>`_ containing several static `intake catalogs <https://intake.readthedocs.io/en/latest/catalog.html>`_ in the form of YAML files.
-Thanks to plugins like `intake-esm <https://intake-esm.readthedocs.io/en/latest/>`_ and `intake-xarray <https://intake-xarray.readthedocs.io/en/latest/>`_`, these catalogs can contain links to ESM data catalogs or data assets that can be loaded into xarray datasets, along with the arguments required to load them.
+Thanks to plugins like `intake-esm <https://intake-esm.readthedocs.io/en/latest/>`_ and `intake-xarray <https://intake-xarray.readthedocs.io/en/latest/>`_, these catalogs can contain links to ESM data catalogs or data assets that can be loaded into xarray datasets, along with the arguments required to load them.
 By editing these files using Git-based version control, anyone is free to contribute a dataset supported by the available intake plugins.
 Users can then browse these catalogs by providing their associated URL as input into intake's ``open_catalog()``; their tree-like structure allows a user to explore their entirety by simply opening the root catalog and recursively walking through it:
 
