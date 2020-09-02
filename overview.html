@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Cloud Data Overview &#8212; Pangeo CMIP6  documentation</title>
+    <title>Cloud data overview &#8212; Pangeo CMIP6  documentation</title>
     <link rel="stylesheet" href="_static/pangeo-style.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -14,7 +14,7 @@
     <link rel="shortcut icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Accessing Data in The Cloud" href="accessing_data.html" />
+    <link rel="next" title="Accessing data in the cloud" href="accessing_data.html" />
     <link rel="prev" title="Pangeo CMIP6" href="index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -55,16 +55,16 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Cloud Data Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#zarr-storage-format">Zarr Storage Format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#directory-layout">Directory Layout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#structure-of-the-csv-file">Structure of the CSV File</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cloud data overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#zarr-storage-format">Zarr storage format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#directory-layout">Directory layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#csv-file-structure">CSV file structure</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="accessing_data.html">Accessing Data in The Cloud</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="accessing_data.html#loading-an-esm-collection">Loading An ESM Collection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="accessing_data.html#searching-for-datasets">Searching For Datasets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="accessing_data.html#loading-datasets">Loading Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="accessing_data.html">Accessing data in the cloud</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="accessing_data.html#loading-an-esm-collection">Loading an ESM collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accessing_data.html#searching-for-datasets">Searching for datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="accessing_data.html#loading-datasets">Loading datasets</a></li>
 </ul>
 </li>
 </ul>
@@ -80,10 +80,10 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Cloud Data Overview</a><ul>
-<li><a class="reference internal" href="#zarr-storage-format">Zarr Storage Format</a></li>
-<li><a class="reference internal" href="#directory-layout">Directory Layout</a></li>
-<li><a class="reference internal" href="#structure-of-the-csv-file">Structure of the CSV File</a></li>
+<li><a class="reference internal" href="#">Cloud data overview</a><ul>
+<li><a class="reference internal" href="#zarr-storage-format">Zarr storage format</a></li>
+<li><a class="reference internal" href="#directory-layout">Directory layout</a></li>
+<li><a class="reference internal" href="#csv-file-structure">CSV file structure</a></li>
 </ul>
 </li>
 </ul>
@@ -99,7 +99,7 @@
     </a>
   </li>
   <li>
-    <a href="accessing_data.html" title="Next Chapter: Accessing Data in The Cloud"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Accessing Dat... &raquo;</span>
+    <a href="accessing_data.html" title="Next Chapter: Accessing data in the cloud"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Accessing dat... &raquo;</span>
     </a>
   </li>
               
@@ -122,9 +122,9 @@
     <div class="body col-md-12 content" role="main">
       
   <div class="section" id="cloud-data-overview">
-<h1>Cloud Data Overview<a class="headerlink" href="#cloud-data-overview" title="Permalink to this headline">¶</a></h1>
+<h1>Cloud data overview<a class="headerlink" href="#cloud-data-overview" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="zarr-storage-format">
-<h2>Zarr Storage Format<a class="headerlink" href="#zarr-storage-format" title="Permalink to this headline">¶</a></h2>
+<h2>Zarr storage format<a class="headerlink" href="#zarr-storage-format" title="Permalink to this headline">¶</a></h2>
 <p>We have chosen the <a class="reference external" href="https://zarr.readthedocs.io/en/stable/">Zarr object model and storage format</a> for our cloud-based data repositories.
 Each Zarr data store in the CMIP6 collection consists of all of the data, including the grids and metadata, stored in Zarr format.
 This format stores the data as a collection of files consisting of regular text files containing metadata and data files consisting of the data divided into compressed chunks which can be read individually or in parallel, allowing very large datasets to scale more efficiently in the cloud.</p>
@@ -135,7 +135,7 @@ Our Zarr data stores correspond to the result of concatenating these netCDF file
 All of the metadata in the original netCDF files has been preserved, including the licensing information and the CMIP6 persistent identifiers (<code class="docutils literal notranslate"><span class="pre">tracking_ids</span></code>) which are unique for each of the original netCDF files.</p>
 </div>
 <div class="section" id="directory-layout">
-<h2>Directory Layout<a class="headerlink" href="#directory-layout" title="Permalink to this headline">¶</a></h2>
+<h2>Directory layout<a class="headerlink" href="#directory-layout" title="Permalink to this headline">¶</a></h2>
 <p>To organize the data there is a list of keywords, each with a <a class="reference external" href="https://github.com/WCRP-CMIP/CMIP6_CVs">controlled vocabulary</a> which has been developed over the many CMIP iterations.
 The keywords categorize the model data in the many ways we might want to search the data.
 For example, to find all available 3 hourly precipitation data from the pre-industrial control runs, we only need to specify the variable, frequency and experiment name.
@@ -155,8 +155,8 @@ The data are structured in this cloud repository using 8 of these keywords in th
 </div>
 <p>Each object specified in this way refers to a single Zarr data store.</p>
 </div>
-<div class="section" id="structure-of-the-csv-file">
-<h2>Structure of the CSV File<a class="headerlink" href="#structure-of-the-csv-file" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="csv-file-structure">
+<h2>CSV file structure<a class="headerlink" href="#csv-file-structure" title="Permalink to this headline">¶</a></h2>
 <p>A master spreadsheet of all available data is stored in a <a class="reference external" href="https://storage.googleapis.com/cmip6/pangeo-cmip6.csv">simple CSV file</a> in which the first line consists of the column names and each subsequent line specifies a Zarr data store.
 The first 8 column names correspond to the standard CMIP keywords; the two additional columns are:</p>
 <ul class="simple">

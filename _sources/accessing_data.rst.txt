@@ -1,4 +1,4 @@
-Accessing Data in The Cloud
+Accessing data in the cloud
 ===========================
 Because of its Zarr format, individual CMIP6 data stores can be accessed using `xarray <https://xarray.pydata.org/en/stable/>`_:
 
@@ -16,7 +16,7 @@ However, when working with multiple data stores at the same time, it is easier t
 This allows the thousands of data stores to be searched and explored using the `CMIP6 controlled vocabulary <https://github.com/WCRP-CMIP/CMIP6_CVs>`_.
 When all relevant data stores have been discovered, they can then be merged and opening into an xarray container automatically, using information specified by the ESM collection.
 
-Loading An ESM Collection
+Loading an ESM collection
 -------------------------
 To load an Earth System Model (ESM) collection with `intake-esm <https://intake-esm.readthedocs.io/en/stable/>`_, the user must provide a valid ESM data catalog as input:
 
@@ -34,7 +34,7 @@ The collection can also be viewed as a `pandas DataFrame <https://pandas.pydata.
 
   col.df.head()
 
-Searching For Datasets
+Searching for datasets
 ----------------------
 After exploring the controlled vocabulary, it’s straightforward to get the data assets you want using intake-esm's ``search()`` method.
 In the example below, we will search for the following:
@@ -61,7 +61,7 @@ In the example below, we will search for the following:
   col_subset = col.search(require_all_on=['source_id'], **query)
   col_subset.df.groupby('source_id')[['experiment_id', 'variable_id', 'table_id']].nunique()
 
-Loading Datasets
+Loading datasets
 ----------------
 Once you've identified data assets of interest, you can load them into xarray dataset containers using intake-esm's ``to_dataset_dict()`` method.
 Invoking this method yields a Python dictionary of high-level aggregated xarray datasets.

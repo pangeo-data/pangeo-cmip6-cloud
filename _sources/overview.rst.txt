@@ -1,6 +1,6 @@
-Cloud Data Overview
+Cloud data overview
 ===================
-Zarr Storage Format
+Zarr storage format
 -------------------
 We have chosen the `Zarr object model and storage format <https://zarr.readthedocs.io/en/stable/>`_ for our cloud-based data repositories.
 Each Zarr data store in the CMIP6 collection consists of all of the data, including the grids and metadata, stored in Zarr format.
@@ -12,7 +12,7 @@ For convenience, these datasets were often divided into multiple netCDF files.
 Our Zarr data stores correspond to the result of concatenating these netCDF files and then storing them as a single Zarr object.
 All of the metadata in the original netCDF files has been preserved, including the licensing information and the CMIP6 persistent identifiers (``tracking_ids``) which are unique for each of the original netCDF files.
 
-Directory Layout
+Directory layout
 ----------------
 To organize the data there is a list of keywords, each with a `controlled vocabulary <https://github.com/WCRP-CMIP/CMIP6_CVs>`_ which has been developed over the many CMIP iterations.
 The keywords categorize the model data in the many ways we might want to search the data.
@@ -33,8 +33,8 @@ The data are structured in this cloud repository using 8 of these keywords in th
 
 Each object specified in this way refers to a single Zarr data store.
 
-Structure of the CSV File
------------------------------
+CSV file structure
+------------------
 A master spreadsheet of all available data is stored in a `simple CSV file <https://storage.googleapis.com/cmip6/pangeo-cmip6.csv>`_ in which the first line consists of the column names and each subsequent line specifies a Zarr data store.
 The first 8 column names correspond to the standard CMIP keywords; the two additional columns are:
 
