@@ -19,9 +19,11 @@ The keywords categorize the model data in the many ways we might want to search 
 For example, to find all available 3 hourly precipitation data from the pre-industrial control runs, we only need to specify the variable, frequency and experiment name.
 The modeling centers all agreed to use the same keywords, each with its own controlled vocabulary.
 In this case, the keywords ``['variable_id', 'table_id', 'experiment_id']`` will have the values ``['pr', '3hr', 'piControl']``.
-The data are structured in this cloud repository using 8 of these keywords in this order::
+The data are structured in this cloud repository using 8 of these keywords in this order:
 
-    cmip6/<activity_id>/<institution_id>/<source_id>/<experiment_id>/<member_id>/<table_id>/<variable_id>/<grid_label>/
+.. code-block:: python
+
+  cmip6/<activity_id>/<institution_id>/<source_id>/<experiment_id>/<member_id>/<table_id>/<variable_id>/<grid_label>/
 
 Each object specified in this way refers to a single Zarr data store.
 
@@ -30,8 +32,10 @@ Structure of the CSV File
 A master spreadsheet of all available data is stored in a `simple CSV file <https://storage.googleapis.com/cmip6/pangeo-cmip6.csv>`_ in which the first line consists of the column names and each subsequent line specifies a Zarr data store.
 The first 9 column names correspond to these 8 keywords, with an additional column for the URL of the Zarr data store.
 The last column is included in the master spreadsheet for convenience when using the DCPP-type of experiments.
-Here are the 10 columns::
+Here are the 10 columns:
 
-    activity_id  institution_id  source_id  experiment_id  member_id  table_id  variable_id  grid_label  zstore  dcpp_init_year
+.. code-block:: python
+
+  activity_id  institution_id  source_id  experiment_id  member_id  table_id  variable_id  grid_label  zstore  dcpp_init_year
 
 Although there are currently over 250,000 entries, this simple text file can be viewed in any spreadsheet application and the entries can be sorted, selected and discovered quickly and efficiently.
