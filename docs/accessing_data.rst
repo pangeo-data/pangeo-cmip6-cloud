@@ -39,15 +39,15 @@ In the example below, we will search for the following:
   - ``ssp585``: emission-driven `RCP8.5 <https://en.wikipedia.org/wiki/Representative_Concentration_Pathway>`_ based on SSP5
 
 - table ID: ``Amon`` which stands for monthly atmospheric data
-- grid label: ``gr`` which stands for regridded data reported on the data provider's preferred target grid::
-  
+- grid label: ``gr`` which stands for regridded data reported on the data provider's preferred target grid
+
+.. code-block:: python
   # form query dictionary
   query = dict(experiment_id=['historical', 'ssp245', 'ssp585'],
                table_id='Amon',
                variable_id=['tas'],
                member_id = 'r1i1p1f1',
                grid_label='gr')
-
   # subset catalog and get some metrics grouped by 'source_id'
   col_subset = col.search(require_all_on=['source_id'], **query)
   col_subset.df.groupby('source_id')[['experiment_id', 'variable_id', 'table_id']].nunique()
