@@ -148,31 +148,17 @@ The collection can also be viewed as a <a class="reference external" href="https
 <h2>Searching For Datasets<a class="headerlink" href="#searching-for-datasets" title="Permalink to this headline">¶</a></h2>
 <p>After exploring the controlled vocabulary, it’s straightforward to get the data assets you want using intake-esm’s <code class="docutils literal notranslate"><span class="pre">search()</span></code> method.
 In the example below, we will search for the following:</p>
-<ul>
+<ul class="simple">
 <li><p>variables: <code class="docutils literal notranslate"><span class="pre">tas</span></code> which stands for near-surface air temperature</p></li>
 <li><p>experiments: <code class="docutils literal notranslate"><span class="pre">[&quot;historical&quot;,</span> <span class="pre">&quot;ssp245&quot;,</span> <span class="pre">&quot;ssp585&quot;]</span></code>:</p>
-<ul class="simple">
+<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">historical</span></code>: all forcing of the recent past</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ssp245</span></code>: update of <a class="reference external" href="https://en.wikipedia.org/wiki/Representative_Concentration_Pathway">RCP4.5</a> based on SSP2</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ssp585</span></code>: emission-driven <a class="reference external" href="https://en.wikipedia.org/wiki/Representative_Concentration_Pathway">RCP8.5</a> based on SSP5</p></li>
 </ul>
 </li>
 <li><p>table ID: <code class="docutils literal notranslate"><span class="pre">Amon</span></code> which stands for monthly atmospheric data</p></li>
-<li><p>grid label: <code class="docutils literal notranslate"><span class="pre">gr</span></code> which stands for regridded data reported on the data provider’s preferred target grid:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># form query dictionary</span>
-</pre></div>
-</div>
-<dl class="simple">
-<dt>query = dict(experiment_id=[‘historical’, ‘ssp245’, ‘ssp585’],</dt><dd><p>table_id=’Amon’,
-variable_id=[‘tas’],
-member_id = ‘r1i1p1f1’,
-grid_label=’gr’)</p>
-</dd>
-</dl>
-<p># subset catalog and get some metrics grouped by ‘source_id’
-col_subset = col.search(require_all_on=[‘source_id’], <a href="#id2"><span class="problematic" id="id3">**</span></a>query)
-col_subset.df.groupby(‘source_id’)[[‘experiment_id’, ‘variable_id’, ‘table_id’]].nunique()</p>
-</li>
+<li><p>grid label: <code class="docutils literal notranslate"><span class="pre">gr</span></code> which stands for regridded data reported on the data provider’s preferred target grid</p></li>
 </ul>
 </div>
 <div class="section" id="loading-datasets">
