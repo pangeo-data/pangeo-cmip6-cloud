@@ -131,7 +131,7 @@ As part of the <a class="reference external" href="https://aws.amazon.com/openda
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>Currently, the Zarr-formatted CMIP6 data is organized and accessed through an Earth System Model (ESM) collection, which can be opened and searched using intake-esm:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">intake</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">intake</span>
 
 <span class="n">col</span> <span class="o">=</span> <span class="n">intake</span><span class="o">.</span><span class="n">open_esm_datastore</span><span class="p">(</span><span class="s2">&quot;https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.json&quot;</span><span class="p">)</span>
 <span class="n">col</span>

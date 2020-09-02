@@ -1,6 +1,8 @@
 Accessing Data in The Cloud
 ===========================
-Because of its Zarr format, individual CMIP6 data stores can be accessed using `xarray <https://xarray.pydata.org/en/stable/>`_::
+Because of its Zarr format, individual CMIP6 data stores can be accessed using `xarray <https://xarray.pydata.org/en/stable/>`_:
+
+.. code-block:: python
 
   import fsspec
   import xarray as xr
@@ -14,7 +16,9 @@ When all relevant data stores have been discovered, they can then be merged and 
 
 Loading An ESM Collection
 -------------------------
-To load an Earth System Model (ESM) collection with `intake-esm <https://intake-esm.readthedocs.io/en/stable/>`_, the user must provide a valid ESM data catalog as input::
+To load an Earth System Model (ESM) collection with `intake-esm <https://intake-esm.readthedocs.io/en/stable/>`_, the user must provide a valid ESM data catalog as input:
+
+.. code-block:: python
 
   import intake
 
@@ -22,7 +26,9 @@ To load an Earth System Model (ESM) collection with `intake-esm <https://intake-
   col
 
 This gives a summary of the ESM collection, including the total number of Zarr data stores (referred to as assets), along with the total number of datasets these Zarr data stores correspond to.
-The collection can also be viewed as a `pandas DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`_::
+The collection can also be viewed as a `pandas DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`_:
+
+.. code-block:: python
 
   col.df.head()
 
@@ -57,7 +63,9 @@ Loading Datasets
 ----------------
 Once you've identified data assets of interest, you can load them into xarray dataset containers using intake-esm's ``to_dataset_dict()`` method.
 Invoking this method yields a Python dictionary of high-level aggregated xarray datasets.
-The logic for merging/concatenating the query results into datasets is provided in the input JSON file, under ``aggregation_control``::
+The logic for merging/concatenating the query results into datasets is provided in the input JSON file, under ``aggregation_control``:
+
+.. code-block:: json
 
   "aggregation_control": {
     "variable_column_name": "variable_id",
@@ -94,14 +102,18 @@ The logic for merging/concatenating the query results into datasets is provided 
   }
 
 Though these aggregation specifications are sufficient to merge individual data assets into xarray datasets, sometimes additional arguments must be provided depending on the format of the data assets.
-For example, Zarr-based assets can be loaded with the option ``consolidated=True``, which relies on a consolidated metadata file to describe the assets with minimal data egress::
+For example, Zarr-based assets can be loaded with the option ``consolidated=True``, which relies on a consolidated metadata file to describe the assets with minimal data egress:
+
+.. code-block:: python
 
   dsets = col_subset.to_dataset_dict(zarr_kwargs={'consolidated': True}, storage_options={'token': 'anon'})
 
   # list all merged datasets
   [key for key in dsets.keys()]
 
-When the datasets have finished loading, we can extract any of them like we would a value in a Python dictionary::
+When the datasets have finished loading, we can extract any of them like we would a value in a Python dictionary:
+
+.. code-block:: python
 
   ds = dsets['ScenarioMIP.THU.CIESM.ssp585.Amon.gr']
   ds

@@ -119,7 +119,7 @@
   <div class="section" id="accessing-data-in-the-cloud">
 <h1>Accessing Data in The Cloud<a class="headerlink" href="#accessing-data-in-the-cloud" title="Permalink to this headline">¶</a></h1>
 <p>Because of its Zarr format, individual CMIP6 data stores can be accessed using <a class="reference external" href="https://xarray.pydata.org/en/stable/">xarray</a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fsspec</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fsspec</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 
 <span class="n">path</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;s3://cmip6-pds/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/&quot;</span><span class="p">)</span> <span class="c1"># gs://cmip6 for data on GCS</span>
@@ -132,7 +132,7 @@ When all relevant data stores have been discovered, they can then be merged and 
 <div class="section" id="loading-an-esm-collection">
 <h2>Loading An ESM Collection<a class="headerlink" href="#loading-an-esm-collection" title="Permalink to this headline">¶</a></h2>
 <p>To load an Earth System Model (ESM) collection with <a class="reference external" href="https://intake-esm.readthedocs.io/en/stable/">intake-esm</a>, the user must provide a valid ESM data catalog as input:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">intake</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">intake</span>
 
 <span class="n">col</span> <span class="o">=</span> <span class="n">intake</span><span class="o">.</span><span class="n">open_esm_datastore</span><span class="p">(</span><span class="s2">&quot;https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.json&quot;</span><span class="p">)</span>
 <span class="n">col</span>
@@ -140,7 +140,7 @@ When all relevant data stores have been discovered, they can then be merged and 
 </div>
 <p>This gives a summary of the ESM collection, including the total number of Zarr data stores (referred to as assets), along with the total number of datasets these Zarr data stores correspond to.
 The collection can also be viewed as a <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html">pandas DataFrame</a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">col</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">col</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -177,51 +177,51 @@ In the example below, we will search for the following:</p>
 <p>Once you’ve identified data assets of interest, you can load them into xarray dataset containers using intake-esm’s <code class="docutils literal notranslate"><span class="pre">to_dataset_dict()</span></code> method.
 Invoking this method yields a Python dictionary of high-level aggregated xarray datasets.
 The logic for merging/concatenating the query results into datasets is provided in the input JSON file, under <code class="docutils literal notranslate"><span class="pre">aggregation_control</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;aggregation_control&quot;</span><span class="p">:</span> <span class="p">{</span>
-  <span class="s2">&quot;variable_column_name&quot;</span><span class="p">:</span> <span class="s2">&quot;variable_id&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;groupby_attrs&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s2">&quot;activity_id&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;institution_id&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;source_id&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;experiment_id&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;table_id&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;grid_label&quot;</span>
-  <span class="p">],</span>
-  <span class="s2">&quot;aggregations&quot;</span><span class="p">:</span> <span class="p">[{</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;union&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;attribute_name&quot;</span><span class="p">:</span> <span class="s2">&quot;variable_id&quot;</span>
-    <span class="p">},</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;aggregation_control&quot;: {
+  &quot;variable_column_name&quot;: &quot;variable_id&quot;,
+  &quot;groupby_attrs&quot;: [
+    &quot;activity_id&quot;,
+    &quot;institution_id&quot;,
+    &quot;source_id&quot;,
+    &quot;experiment_id&quot;,
+    &quot;table_id&quot;,
+    &quot;grid_label&quot;
+  ],
+  &quot;aggregations&quot;: [{
+      &quot;type&quot;: &quot;union&quot;,
+      &quot;attribute_name&quot;: &quot;variable_id&quot;
+    },
 
-    <span class="p">{</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;join_new&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;attribute_name&quot;</span><span class="p">:</span> <span class="s2">&quot;member_id&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;coords&quot;</span><span class="p">:</span> <span class="s2">&quot;minimal&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;compat&quot;</span><span class="p">:</span> <span class="s2">&quot;override&quot;</span>
-      <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;join_new&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;attribute_name&quot;</span><span class="p">:</span> <span class="s2">&quot;dcpp_init_year&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;coords&quot;</span><span class="p">:</span> <span class="s2">&quot;minimal&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;compat&quot;</span><span class="p">:</span> <span class="s2">&quot;override&quot;</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+    {
+      &quot;type&quot;: &quot;join_new&quot;,
+      &quot;attribute_name&quot;: &quot;member_id&quot;,
+      &quot;options&quot;: {
+        &quot;coords&quot;: &quot;minimal&quot;,
+        &quot;compat&quot;: &quot;override&quot;
+      }
+    },
+    {
+      &quot;type&quot;: &quot;join_new&quot;,
+      &quot;attribute_name&quot;: &quot;dcpp_init_year&quot;,
+      &quot;options&quot;: {
+        &quot;coords&quot;: &quot;minimal&quot;,
+        &quot;compat&quot;: &quot;override&quot;
+      }
+    }
+  ]
+}
 </pre></div>
 </div>
 <p>Though these aggregation specifications are sufficient to merge individual data assets into xarray datasets, sometimes additional arguments must be provided depending on the format of the data assets.
 For example, Zarr-based assets can be loaded with the option <code class="docutils literal notranslate"><span class="pre">consolidated=True</span></code>, which relies on a consolidated metadata file to describe the assets with minimal data egress:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dsets</span> <span class="o">=</span> <span class="n">col_subset</span><span class="o">.</span><span class="n">to_dataset_dict</span><span class="p">(</span><span class="n">zarr_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;consolidated&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="n">storage_options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="s1">&#39;anon&#39;</span><span class="p">})</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dsets</span> <span class="o">=</span> <span class="n">col_subset</span><span class="o">.</span><span class="n">to_dataset_dict</span><span class="p">(</span><span class="n">zarr_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;consolidated&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="n">storage_options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="s1">&#39;anon&#39;</span><span class="p">})</span>
 
 <span class="c1"># list all merged datasets</span>
 <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dsets</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
 </pre></div>
 </div>
 <p>When the datasets have finished loading, we can extract any of them like we would a value in a Python dictionary:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">dsets</span><span class="p">[</span><span class="s1">&#39;ScenarioMIP.THU.CIESM.ssp585.Amon.gr&#39;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">dsets</span><span class="p">[</span><span class="s1">&#39;ScenarioMIP.THU.CIESM.ssp585.Amon.gr&#39;</span><span class="p">]</span>
 <span class="n">ds</span>
 </pre></div>
 </div>
