@@ -40,3 +40,4 @@ Documentation
 
    overview
    accessing_data
+   pangeo_catalog
