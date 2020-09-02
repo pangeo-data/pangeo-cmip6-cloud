@@ -142,7 +142,15 @@ For example, to find all available 3 hourly precipitation data from the pre-indu
 The modeling centers all agreed to use the same keywords, each with its own controlled vocabulary.
 In this case, the keywords <code class="docutils literal notranslate"><span class="pre">['variable_id',</span> <span class="pre">'table_id',</span> <span class="pre">'experiment_id']</span></code> will have the values <code class="docutils literal notranslate"><span class="pre">['pr',</span> <span class="pre">'3hr',</span> <span class="pre">'piControl']</span></code>.
 The data are structured in this cloud repository using 8 of these keywords in this order:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cmip6</span><span class="o">/&lt;</span><span class="n">activity_id</span><span class="o">&gt;/&lt;</span><span class="n">institution_id</span><span class="o">&gt;/&lt;</span><span class="n">source_id</span><span class="o">&gt;/&lt;</span><span class="n">experiment_id</span><span class="o">&gt;/&lt;</span><span class="n">member_id</span><span class="o">&gt;/&lt;</span><span class="n">table_id</span><span class="o">&gt;/&lt;</span><span class="n">variable_id</span><span class="o">&gt;/&lt;</span><span class="n">grid_label</span><span class="o">&gt;/</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cmip6/
+└──&lt;activity_id&gt;/
+    └──&lt;institution_id&gt;/
+        └──&lt;source_id&gt;/
+            └──&lt;experiment_id&gt;/
+                └──&lt;member_id&gt;/
+                    └──&lt;table_id&gt;/
+                        └──&lt;variable_id&gt;/
+                            └──&lt;grid_label&gt;/
 </pre></div>
 </div>
 <p>Each object specified in this way refers to a single Zarr data store.</p>
@@ -150,13 +158,12 @@ The data are structured in this cloud repository using 8 of these keywords in th
 <div class="section" id="structure-of-the-csv-file">
 <h2>Structure of the CSV File<a class="headerlink" href="#structure-of-the-csv-file" title="Permalink to this headline">¶</a></h2>
 <p>A master spreadsheet of all available data is stored in a <a class="reference external" href="https://storage.googleapis.com/cmip6/pangeo-cmip6.csv">simple CSV file</a> in which the first line consists of the column names and each subsequent line specifies a Zarr data store.
-The first 9 column names correspond to these 8 keywords, with an additional column for the URL of the Zarr data store.
-The last column is included in the master spreadsheet for convenience when using the DCPP-type of experiments.
-Here are the 10 columns:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">activity_id</span>  <span class="n">institution_id</span>  <span class="n">source_id</span>  <span class="n">experiment_id</span>  <span class="n">member_id</span>  <span class="n">table_id</span>  <span class="n">variable_id</span>  <span class="n">grid_label</span>  <span class="n">zstore</span>  <span class="n">dcpp_init_year</span>
-</pre></div>
-</div>
-<p>Although there are currently over 250,000 entries, this simple text file can be viewed in any spreadsheet application and the entries can be sorted, selected and discovered quickly and efficiently.</p>
+The first 8 column names correspond to the standard CMIP keywords; the two additional columns are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">zstore</span></code>: the URL of the corresponding Zarr data store</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dcpp_init_year</span></code>: optional metadata for convenience when accessing <a class="reference external" href="https://www.wcrp-climate.org/dcp-overview">DCPP</a>-type experiments</p></li>
+</ul>
+<p>Although there are currently over 250,000 entries, this text file can be viewed in any spreadsheet application and the entries can be sorted, selected and discovered quickly and efficiently.</p>
 </div>
 </div>
 
