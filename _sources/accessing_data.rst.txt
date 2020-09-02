@@ -42,6 +42,7 @@ In the example below, we will search for the following:
 - grid label: ``gr`` which stands for regridded data reported on the data provider's preferred target grid
 
 .. code-block:: python
+
   # form query dictionary
   query = dict(experiment_id=['historical', 'ssp245', 'ssp585'],
                table_id='Amon',

@@ -160,6 +160,17 @@ In the example below, we will search for the following:</p>
 <li><p>table ID: <code class="docutils literal notranslate"><span class="pre">Amon</span></code> which stands for monthly atmospheric data</p></li>
 <li><p>grid label: <code class="docutils literal notranslate"><span class="pre">gr</span></code> which stands for regridded data reported on the data provider’s preferred target grid</p></li>
 </ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># form query dictionary</span>
+<span class="n">query</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">experiment_id</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;historical&#39;</span><span class="p">,</span> <span class="s1">&#39;ssp245&#39;</span><span class="p">,</span> <span class="s1">&#39;ssp585&#39;</span><span class="p">],</span>
+             <span class="n">table_id</span><span class="o">=</span><span class="s1">&#39;Amon&#39;</span><span class="p">,</span>
+             <span class="n">variable_id</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tas&#39;</span><span class="p">],</span>
+             <span class="n">member_id</span> <span class="o">=</span> <span class="s1">&#39;r1i1p1f1&#39;</span><span class="p">,</span>
+             <span class="n">grid_label</span><span class="o">=</span><span class="s1">&#39;gr&#39;</span><span class="p">)</span>
+<span class="c1"># subset catalog and get some metrics grouped by &#39;source_id&#39;</span>
+<span class="n">col_subset</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">require_all_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;source_id&#39;</span><span class="p">],</span> <span class="o">**</span><span class="n">query</span><span class="p">)</span>
+<span class="n">col_subset</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;source_id&#39;</span><span class="p">)[[</span><span class="s1">&#39;experiment_id&#39;</span><span class="p">,</span> <span class="s1">&#39;variable_id&#39;</span><span class="p">,</span> <span class="s1">&#39;table_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="loading-datasets">
 <h2>Loading Datasets<a class="headerlink" href="#loading-datasets" title="Permalink to this headline">¶</a></h2>
