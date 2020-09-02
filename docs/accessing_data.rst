@@ -7,8 +7,10 @@ Because of its Zarr format, individual CMIP6 data stores can be accessed using `
   import fsspec
   import xarray as xr
 
-  path = fsspec.get_mapper("s3://cmip6-pds/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/") # gs://cmip6 for data on GCS
-  ds = xr.open_zarr(path, consolidated=True) # make sure to specify that metadata is consolidated
+  # gs://cmip6 for data on GCS
+  path = fsspec.get_mapper("s3://cmip6-pds/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/")
+  # make sure to specify that metadata is consolidated
+  ds = xr.open_zarr(path, consolidated=True)
 
 However, when working with multiple data stores at the same time, it is easier to access them using an Earth System Model (ESM) collection with with `intake-esm <https://intake-esm.readthedocs.io/en/stable/>`_.
 This allows the thousands of data stores to be searched and explored using the `CMIP6 controlled vocabulary <https://github.com/WCRP-CMIP/CMIP6_CVs>`_.
@@ -106,8 +108,8 @@ For example, Zarr-based assets can be loaded with the option ``consolidated=True
 
 .. code-block:: python
 
-  dsets = col_subset.to_dataset_dict(zarr_kwargs={'consolidated': True}, storage_options={'token': 'anon'})
-
+  dsets = col_subset.to_dataset_dict(zarr_kwargs={'consolidated': True},
+                                     storage_options={'token': 'anon'})
   # list all merged datasets
   [key for key in dsets.keys()]
 
