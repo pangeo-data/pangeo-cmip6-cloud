@@ -21,7 +21,7 @@ By downloading the `CSV file <https://storage.cloud.google.com/cmip6/cmip6-zarr-
   import pandas as pd
 
   df = pd.read_csv("https://storage.cloud.google.com/cmip6/cmip6-zarr-consolidated-stores-noQC.csv")
-  df.query("activity_id=='CMIP' & table_id == 'Amon' & variable_id == 'tas' & experiment_id == 'historical'")
+  df.query("activity_id=='CMIP' & table_id=='Amon' & variable_id=='tas'")
 
 From here, we can open any of the selected data stores using xarray, providing the value of the ``zstore`` column as input:
 

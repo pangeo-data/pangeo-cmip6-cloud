@@ -146,7 +146,7 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://storage.cloud.google.com/cmip6/cmip6-zarr-consolidated-stores-noQC.csv&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;activity_id==&#39;CMIP&#39; &amp; table_id == &#39;Amon&#39; &amp; variable_id == &#39;tas&#39; &amp; experiment_id == &#39;historical&#39;&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;activity_id==&#39;CMIP&#39; &amp; table_id==&#39;Amon&#39; &amp; variable_id==&#39;tas&#39;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>From here, we can open any of the selected data stores using xarray, providing the value of the <code class="docutils literal notranslate"><span class="pre">zstore</span></code> column as input:</p>
