@@ -1,5 +1,7 @@
 Accessing data in the cloud
 ===========================
+Manually searching the catalog
+------------------------------
 Because of its Zarr format, individual CMIP6 data stores can be accessed using `xarray <https://xarray.pydata.org/en/stable/>`_:
 
 .. code-block:: python
@@ -7,14 +9,34 @@ Because of its Zarr format, individual CMIP6 data stores can be accessed using `
   import fsspec
   import xarray as xr
 
-  # gs://cmip6 for data on GCS
-  path = fsspec.get_mapper("s3://cmip6-pds/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/")
+  # create a mutable-mapping-style interface to the store
+  mapper = fsspec.get_mapper("s3://cmip6-pds/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/")
   # make sure to specify that metadata is consolidated
-  ds = xr.open_zarr(path, consolidated=True)
+  ds = xr.open_zarr(mapper, consolidated=True)
 
-However, when working with multiple data stores at the same time, it is easier to access them using an Earth System Model (ESM) collection with with `intake-esm <https://intake-esm.readthedocs.io/en/stable/>`_.
-This allows the thousands of data stores to be searched and explored using the `CMIP6 controlled vocabulary <https://github.com/WCRP-CMIP/CMIP6_CVs>`_.
-When all relevant data stores have been discovered, they can then be merged and opening into an xarray container automatically, using information specified by the ESM collection.
+By downloading the `CSV file <https://storage.cloud.google.com/cmip6/cmip6-zarr-consolidated-stores-noQC.csv>`_ enumerating all available data stores, we can interact with the spreadsheet through a `pandas DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`_ to search and explore for relevant data using the `CMIP6 controlled vocabulary <https://github.com/WCRP-CMIP/CMIP6_CVs>`_:
+
+.. code-block:: python
+
+  import pandas as pd
+
+  df = pd.read_csv("https://storage.cloud.google.com/cmip6/cmip6-zarr-consolidated-stores-noQC.csv")
+  df.query("activity_id=='CMIP' & table_id == 'Amon' & variable_id == 'tas' & experiment_id == 'historical'")
+
+From here, we can open any of the selected data stores using xarray, providing the value of the ``zstore`` column as input:
+
+.. code-block:: python
+
+  # get the path to a specific zarr store
+  zstore = df_subset.zstore.values[-1]
+  mapper = fsspec.get_mapper(zstore)
+  # open using xarray
+  ds = xr.open_zarr(mapper, consolidated=True)
+
+When working with multiple data stores at the same time, it may be necessary to combine several together to form a dataset for analysis.
+In these cases, it is easier to access them using an Earth System Model (ESM) collection with with `intake-esm <https://intake-esm.readthedocs.io/en/stable/>`_.
+An ESM collection contains metadata describing how data stores can be combined to yield highly aggregated datasets, which is used by intake-esm to automatically merge/concatenate them when they are loaded into an xarray container.
+This eases the burden on the user to manually combine data, while still offering the ability to search and explore all of the available data stores.
 
 Loading an ESM collection
 -------------------------
@@ -28,7 +50,7 @@ To load an Earth System Model (ESM) collection with `intake-esm <https://intake-
   col
 
 This gives a summary of the ESM collection, including the total number of Zarr data stores (referred to as assets), along with the total number of datasets these Zarr data stores correspond to.
-The collection can also be viewed as a `pandas DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`_:
+The collection can also be viewed as a DataFrame:
 
 .. code-block:: python
 
