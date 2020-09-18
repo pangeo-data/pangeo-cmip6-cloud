@@ -12,24 +12,23 @@ As part of `Google Cloud Public Datasets <https://cloud.google.com/public-datase
 
 Requirements
 ------------
-First and foremost, a Zarr package is required to interact with the data stores; listed are languages with documented Zarr packages:
+First and foremost, a Zarr package is required to interact with the data stores; listed are languages with Zarr packages with active development:
 
-- List
-- of
-- languages/projects
-- that
-- allow
-- zarr
-- support
+- Python: `zarr-developers/zarr-python <https://github.com/zarr-developers/zarr-python>`_
+- TypeScript: `gzuidhof/zarr.js <https://github.com/gzuidhof/zarr.js/>`_
+- C++: `constantinpape/z5 <https://github.com/constantinpape/z5>`_
+- Julia: `meggart/zarr.jl <https://github.com/meggart/Zarr.jl>`_
+- Java: `saalfeldlab/n5-zarr <https://github.com/saalfeldlab/n5-zarr>`_
+- Scala: `lasersonlab/ndarray.scala <https://github.com/lasersonlab/ndarray.scala>`_
+- C: `Unidata/netcdf-c/libnczarr <https://github.com/Unidata/netcdf-c/tree/master/libnczarr>`_
 
-Additionally, a filesystem package for Google Cloud and/or S3 storage is required to access the files containing the datasets; some popular packages include:
+Additionally, a filesystem package for Google Cloud and/or S3 storage is required for some languages to access the files containing the datasets:
 
-- should
-- we
-- list
-- FS packages
-- for all
-- Zarr langauges?
+- Python: `gcsfs <https://gcsfs.readthedocs.io/en/latest/>`_ or `s3fs <https://s3fs.readthedocs.io/en/latest/>`_
+- Julia: `AWSCore <https://github.com/JuliaCloud/AWSCore.jl>`_
+- Java: `saalfeldlab/n5-zarr <https://github.com/saalfeldlab/n5-zarr>`_
+- Scala: `lasersonlab/ndarray.scala <https://github.com/lasersonlab/ndarray.scala>`_
+- C: `Unidata/netcdf-c/libnczarr <https://github.com/Unidata/netcdf-c/tree/master/libnczarr>`_
 
 Though optional, a CSV-loading package allows for searching and filtering of the Zarr data stores, which are enumerated in CSV files located at the root of each cloud storage bucket.
 Python users are encouraged to use `intake <https://intake.readthedocs.io/en/stable/>`_, `intake-esm <https://intake-esm.readthedocs.io/en/stable/>`_, and `xarray <https://xarray.pydata.org/en/stable/>`_, which facilitate the exploration and use of the data through the use of Earth System Model (ESM) collection specifications which are also provided at the root of each bucket.
