@@ -1,26 +1,34 @@
 Accessing data in the cloud
 ===========================
-Manually searching the catalog
-------------------------------
-Because of its Zarr format, individual CMIP6 data stores can be accessed using `xarray <https://xarray.pydata.org/en/stable/>`_:
+Once the master CSV file is understood, accessing data is a matter of searching for relevant datasets using the controlled vocabulary and opening them by pointing your Zarr package of choice to their corresponding ``zstore`` URLs.
+While this can be done using any language whose Zarr package supports the reading of remote data stores, the following examples will be in Python, showcasing the use of `xarray <https://xarray.pydata.org/en/stable/>`_, `intake <https://intake.readthedocs.io/en/stable/>`_, and `intake-esm <https://intake-esm.readthedocs.io/en/stable/>`_ to open and explore Earth System Model (ESM) collections of the CMIP6 data.
+
+Opening a single Zarr data store
+--------------------------------
+A standalone Zarr data store can be opened using xarray's ``open_zarr()`` function.
+The function takes a Python-native ``MutableMapping`` as input, which can be acquired from a Zarr store URL using either `gcsfs <https://gcsfs.readthedocs.io/en/latest/>`_ or `s3fs <https://s3fs.readthedocs.io/en/latest/>`_, depending on the cloud provider:
 
 .. code-block:: python
 
-  import fsspec
+  import gcsfs
   import xarray as xr
 
-  # create a mutable-mapping-style interface to the store
-  mapper = fsspec.get_mapper("s3://cmip6-pds/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/")
+  # create a MutableMapping from a store URL
+  mapper = gcsfs.get_mapper("gs://cmip6/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/")
   # make sure to specify that metadata is consolidated
   ds = xr.open_zarr(mapper, consolidated=True)
 
-By downloading the `CSV file <https://storage.cloud.google.com/cmip6/cmip6-zarr-consolidated-stores-noQC.csv>`_ enumerating all available data stores, we can interact with the spreadsheet through a `pandas DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`_ to search and explore for relevant data using the `CMIP6 controlled vocabulary <https://github.com/WCRP-CMIP/CMIP6_CVs>`_:
+Notice the option ``consolidated=True``, which relies on a consolidated metadata file to open and describe the Zarr data store with minimal data egress.
+
+Manually searching the catalog
+------------------------------
+By downloading the master CSV file enumerating all available data stores, we can interact with the spreadsheet through a `pandas DataFrame <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`_ to search and explore for relevant data using the `CMIP6 controlled vocabulary <https://github.com/WCRP-CMIP/CMIP6_CVs>`_:
 
 .. code-block:: python
 
   import pandas as pd
 
-  df = pd.read_csv("https://storage.cloud.google.com/cmip6/cmip6-zarr-consolidated-stores-noQC.csv")
+  df = pd.read_csv("https://storage.cloud.google.com/cmip6/cmip6-zarr-consolidated-stores.csv")
   df.query("activity_id=='CMIP' & table_id=='Amon' & variable_id=='tas'")
 
 From here, we can open any of the selected data stores using xarray, providing the value of the ``zstore`` column as input:
@@ -29,24 +37,24 @@ From here, we can open any of the selected data stores using xarray, providing t
 
   # get the path to a specific zarr store
   zstore = df_subset.zstore.values[-1]
-  mapper = fsspec.get_mapper(zstore)
+  mapper = gcsfs.get_mapper(zstore)
   # open using xarray
   ds = xr.open_zarr(mapper, consolidated=True)
 
 When working with multiple data stores at the same time, it may be necessary to combine several together to form a dataset for analysis.
-In these cases, it is easier to access them using an Earth System Model (ESM) collection with with `intake-esm <https://intake-esm.readthedocs.io/en/stable/>`_.
+In these cases, it is easier to access them using an ESM collection with intake-esm.
 An ESM collection contains metadata describing how data stores can be combined to yield highly aggregated datasets, which is used by intake-esm to automatically merge/concatenate them when they are loaded into an xarray container.
 This eases the burden on the user to manually combine data, while still offering the ability to search and explore all of the available data stores.
 
 Loading an ESM collection
 -------------------------
-To load an Earth System Model (ESM) collection with `intake-esm <https://intake-esm.readthedocs.io/en/stable/>`_, the user must provide a valid ESM data catalog as input:
+To load an ESM collection with intake-esm, the user must provide a valid ESM collection specification as input to intake's ``open_esm_datastore()`` function:
 
 .. code-block:: python
 
   import intake
 
-  col = intake.open_esm_datastore("https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.json")
+  col = intake.open_esm_datastore("https://storage.cloud.google.com/cmip6/pangeo-cmip6.json")
   col
 
 This gives a summary of the ESM collection, including the total number of Zarr data stores (referred to as assets), along with the total number of datasets these Zarr data stores correspond to.
@@ -58,7 +66,7 @@ The collection can also be viewed as a DataFrame:
 
 Searching for datasets
 ----------------------
-After exploring the controlled vocabulary, it’s straightforward to get the data assets you want using intake-esm's ``search()`` method.
+After exploring the controlled vocabulary, it’s straightforward to get the data assets you want using intake-esm's ``search()`` function.
 In the example below, we will search for the following:
 
 - variables: ``tas`` which stands for near-surface air temperature
@@ -85,8 +93,8 @@ In the example below, we will search for the following:
 
 Loading datasets
 ----------------
-Once you've identified data assets of interest, you can load them into xarray dataset containers using intake-esm's ``to_dataset_dict()`` method.
-Invoking this method yields a Python dictionary of high-level aggregated xarray datasets.
+Once you've identified data assets of interest, you can load them into xarray dataset containers using intake-esm's ``to_dataset_dict()`` function.
+Invoking this function yields a Python dictionary of high-level aggregated xarray datasets.
 The logic for merging/concatenating the query results into datasets is provided in the input JSON file, under ``aggregation_control``:
 
 .. code-block:: json
