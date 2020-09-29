@@ -5,13 +5,12 @@ CMIP6 data in the cloud can be found in both Google Cloud and S3 storage buckets
 - ``gs://cmip6``
 - ``s3://cmip6-pds``
 
-The data is primarily Zarr-formatted, with a predetermined and well-defined directory structure to ensure that it is properly organized and classified.
+The data is primarily `Zarr <https://zarr.readthedocs.io/en/stable/>`_-formatted, with a predetermined and well-defined directory structure to ensure that it is properly organized and classified.
 This directory structure is reflected in the master CSV files located at the root of each bucket, which enumerates all available Zarr stores using their containing directory names as columns to allow for sorting and filtering.
 
 Zarr storage format
 -------------------
-We have chosen the `Zarr object model and storage format <https://zarr.readthedocs.io/en/stable/>`_ for our cloud-based data repositories.
-Each Zarr data store in the CMIP6 collection consists of all of the data, including the grids and metadata, stored in Zarr format.
+Each data store in the CMIP6 collection consists of all of the data, including the grids and metadata, stored in Zarr format.
 This format stores the data as a collection of files consisting of regular text files containing metadata and data files consisting of the data divided into compressed chunks which can be read individually or in parallel, allowing very large datasets to scale more efficiently in the cloud.
 
 The original datasets, stored in the WCRP/CMIP6 ESGF repositories, consist of `netCDF <https://www.unidata.ucar.edu/software/netcdf/>`_ files.
