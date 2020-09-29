@@ -13,7 +13,7 @@ As part of `Google Cloud Public Datasets <https://cloud.google.com/public-datase
 Requirements
 ------------
 First and foremost, a Zarr package is required to interact with the data stores.
-Listed below are languages with actively developed Zarr packages; italicized languages do not yet have Zarr packages that support the reading of remote data stores:
+Listed below are languages with actively developed Zarr packages; bolded languages do not yet have Zarr packages that support the reading of remote data stores:
 
 - Python: `zarr-developers/zarr-python <https://github.com/zarr-developers/zarr-python>`_
 - TypeScript: `gzuidhof/zarr.js <https://github.com/gzuidhof/zarr.js/>`_
