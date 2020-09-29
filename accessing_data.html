@@ -57,11 +57,12 @@
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Cloud data overview</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="overview.html#zarr-storage-format">Zarr storage format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#directory-layout">Directory layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#directory-structure">Directory structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overview.html#csv-file-structure">CSV file structure</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Accessing data in the cloud</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#opening-a-single-zarr-data-store">Opening a single Zarr data store</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#manually-searching-the-catalog">Manually searching the catalog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#loading-an-esm-collection">Loading an ESM collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#searching-for-datasets">Searching for datasets</a></li>
@@ -87,6 +88,7 @@
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Accessing data in the cloud</a><ul>
+<li><a class="reference internal" href="#opening-a-single-zarr-data-store">Opening a single Zarr data store</a></li>
 <li><a class="reference internal" href="#manually-searching-the-catalog">Manually searching the catalog</a></li>
 <li><a class="reference internal" href="#loading-an-esm-collection">Loading an ESM collection</a></li>
 <li><a class="reference internal" href="#searching-for-datasets">Searching for datasets</a></li>
@@ -130,44 +132,51 @@
       
   <div class="section" id="accessing-data-in-the-cloud">
 <h1>Accessing data in the cloud<a class="headerlink" href="#accessing-data-in-the-cloud" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="manually-searching-the-catalog">
-<h2>Manually searching the catalog<a class="headerlink" href="#manually-searching-the-catalog" title="Permalink to this headline">¶</a></h2>
-<p>Because of its Zarr format, individual CMIP6 data stores can be accessed using <a class="reference external" href="https://xarray.pydata.org/en/stable/">xarray</a>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fsspec</span>
+<p>Once the master CSV file is understood, accessing data is a matter of searching for relevant datasets using the controlled vocabulary and opening them by pointing your Zarr package of choice to their corresponding <code class="docutils literal notranslate"><span class="pre">zstore</span></code> URLs.
+While this can be done using any language whose Zarr package supports the reading of remote data stores, the following examples will be in Python, showcasing the use of <a class="reference external" href="https://xarray.pydata.org/en/stable/">xarray</a>, <a class="reference external" href="https://intake.readthedocs.io/en/stable/">intake</a>, and <a class="reference external" href="https://intake-esm.readthedocs.io/en/stable/">intake-esm</a> to open and explore Earth System Model (ESM) collections of the CMIP6 data.</p>
+<div class="section" id="opening-a-single-zarr-data-store">
+<h2>Opening a single Zarr data store<a class="headerlink" href="#opening-a-single-zarr-data-store" title="Permalink to this headline">¶</a></h2>
+<p>A standalone Zarr data store can be opened using xarray’s <code class="docutils literal notranslate"><span class="pre">open_zarr()</span></code> function.
+The function takes a Python-native <code class="docutils literal notranslate"><span class="pre">MutableMapping</span></code> as input, which can be acquired from a Zarr store URL using either <a class="reference external" href="https://gcsfs.readthedocs.io/en/latest/">gcsfs</a> or <a class="reference external" href="https://s3fs.readthedocs.io/en/latest/">s3fs</a>, depending on the cloud provider:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gcsfs</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 
-<span class="c1"># create a mutable-mapping-style interface to the store</span>
-<span class="n">mapper</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;s3://cmip6-pds/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/&quot;</span><span class="p">)</span>
+<span class="c1"># create a MutableMapping from a store URL</span>
+<span class="n">mapper</span> <span class="o">=</span> <span class="n">gcsfs</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;gs://cmip6/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/&quot;</span><span class="p">)</span>
 <span class="c1"># make sure to specify that metadata is consolidated</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>By downloading the <a class="reference external" href="https://storage.cloud.google.com/cmip6/cmip6-zarr-consolidated-stores-noQC.csv">CSV file</a> enumerating all available data stores, we can interact with the spreadsheet through a <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html">pandas DataFrame</a> to search and explore for relevant data using the <a class="reference external" href="https://github.com/WCRP-CMIP/CMIP6_CVs">CMIP6 controlled vocabulary</a>:</p>
+<p>Notice the option <code class="docutils literal notranslate"><span class="pre">consolidated=True</span></code>, which relies on a consolidated metadata file to open and describe the Zarr data store with minimal data egress.</p>
+</div>
+<div class="section" id="manually-searching-the-catalog">
+<h2>Manually searching the catalog<a class="headerlink" href="#manually-searching-the-catalog" title="Permalink to this headline">¶</a></h2>
+<p>By downloading the master CSV file enumerating all available data stores, we can interact with the spreadsheet through a <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html">pandas DataFrame</a> to search and explore for relevant data using the <a class="reference external" href="https://github.com/WCRP-CMIP/CMIP6_CVs">CMIP6 controlled vocabulary</a>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://storage.cloud.google.com/cmip6/cmip6-zarr-consolidated-stores-noQC.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://storage.cloud.google.com/cmip6/cmip6-zarr-consolidated-stores.csv&quot;</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;activity_id==&#39;CMIP&#39; &amp; table_id==&#39;Amon&#39; &amp; variable_id==&#39;tas&#39;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>From here, we can open any of the selected data stores using xarray, providing the value of the <code class="docutils literal notranslate"><span class="pre">zstore</span></code> column as input:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the path to a specific zarr store</span>
 <span class="n">zstore</span> <span class="o">=</span> <span class="n">df_subset</span><span class="o">.</span><span class="n">zstore</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">mapper</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="n">zstore</span><span class="p">)</span>
+<span class="n">mapper</span> <span class="o">=</span> <span class="n">gcsfs</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="n">zstore</span><span class="p">)</span>
 <span class="c1"># open using xarray</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>When working with multiple data stores at the same time, it may be necessary to combine several together to form a dataset for analysis.
-In these cases, it is easier to access them using an Earth System Model (ESM) collection with with <a class="reference external" href="https://intake-esm.readthedocs.io/en/stable/">intake-esm</a>.
+In these cases, it is easier to access them using an ESM collection with intake-esm.
 An ESM collection contains metadata describing how data stores can be combined to yield highly aggregated datasets, which is used by intake-esm to automatically merge/concatenate them when they are loaded into an xarray container.
 This eases the burden on the user to manually combine data, while still offering the ability to search and explore all of the available data stores.</p>
 </div>
 <div class="section" id="loading-an-esm-collection">
 <h2>Loading an ESM collection<a class="headerlink" href="#loading-an-esm-collection" title="Permalink to this headline">¶</a></h2>
-<p>To load an Earth System Model (ESM) collection with <a class="reference external" href="https://intake-esm.readthedocs.io/en/stable/">intake-esm</a>, the user must provide a valid ESM data catalog as input:</p>
+<p>To load an ESM collection with intake-esm, the user must provide a valid ESM collection specification as input to intake’s <code class="docutils literal notranslate"><span class="pre">open_esm_datastore()</span></code> function:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">intake</span>
 
-<span class="n">col</span> <span class="o">=</span> <span class="n">intake</span><span class="o">.</span><span class="n">open_esm_datastore</span><span class="p">(</span><span class="s2">&quot;https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.json&quot;</span><span class="p">)</span>
+<span class="n">col</span> <span class="o">=</span> <span class="n">intake</span><span class="o">.</span><span class="n">open_esm_datastore</span><span class="p">(</span><span class="s2">&quot;https://storage.cloud.google.com/cmip6/pangeo-cmip6.json&quot;</span><span class="p">)</span>
 <span class="n">col</span>
 </pre></div>
 </div>
@@ -179,7 +188,7 @@ The collection can also be viewed as a DataFrame:</p>
 </div>
 <div class="section" id="searching-for-datasets">
 <h2>Searching for datasets<a class="headerlink" href="#searching-for-datasets" title="Permalink to this headline">¶</a></h2>
-<p>After exploring the controlled vocabulary, it’s straightforward to get the data assets you want using intake-esm’s <code class="docutils literal notranslate"><span class="pre">search()</span></code> method.
+<p>After exploring the controlled vocabulary, it’s straightforward to get the data assets you want using intake-esm’s <code class="docutils literal notranslate"><span class="pre">search()</span></code> function.
 In the example below, we will search for the following:</p>
 <ul class="simple">
 <li><p>variables: <code class="docutils literal notranslate"><span class="pre">tas</span></code> which stands for near-surface air temperature</p></li>
@@ -207,8 +216,8 @@ In the example below, we will search for the following:</p>
 </div>
 <div class="section" id="loading-datasets">
 <h2>Loading datasets<a class="headerlink" href="#loading-datasets" title="Permalink to this headline">¶</a></h2>
-<p>Once you’ve identified data assets of interest, you can load them into xarray dataset containers using intake-esm’s <code class="docutils literal notranslate"><span class="pre">to_dataset_dict()</span></code> method.
-Invoking this method yields a Python dictionary of high-level aggregated xarray datasets.
+<p>Once you’ve identified data assets of interest, you can load them into xarray dataset containers using intake-esm’s <code class="docutils literal notranslate"><span class="pre">to_dataset_dict()</span></code> function.
+Invoking this function yields a Python dictionary of high-level aggregated xarray datasets.
 The logic for merging/concatenating the query results into datasets is provided in the input JSON file, under <code class="docutils literal notranslate"><span class="pre">aggregation_control</span></code>:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;aggregation_control&quot;: {
   &quot;variable_column_name&quot;: &quot;variable_id&quot;,

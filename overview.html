@@ -57,11 +57,12 @@
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Cloud data overview</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#zarr-storage-format">Zarr storage format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#directory-layout">Directory layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#csv-file-structure">CSV file structure</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="accessing_data.html">Accessing data in the cloud</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="accessing_data.html#opening-a-single-zarr-data-store">Opening a single Zarr data store</a></li>
 <li class="toctree-l2"><a class="reference internal" href="accessing_data.html#manually-searching-the-catalog">Manually searching the catalog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="accessing_data.html#loading-an-esm-collection">Loading an ESM collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="accessing_data.html#searching-for-datasets">Searching for datasets</a></li>
@@ -88,7 +89,7 @@
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Cloud data overview</a><ul>
 <li><a class="reference internal" href="#zarr-storage-format">Zarr storage format</a></li>
-<li><a class="reference internal" href="#directory-layout">Directory layout</a></li>
+<li><a class="reference internal" href="#directory-structure">Directory structure</a></li>
 <li><a class="reference internal" href="#csv-file-structure">CSV file structure</a></li>
 </ul>
 </li>
@@ -129,26 +130,31 @@
       
   <div class="section" id="cloud-data-overview">
 <h1>Cloud data overview<a class="headerlink" href="#cloud-data-overview" title="Permalink to this headline">¶</a></h1>
+<p>CMIP6 data in the cloud can be found in both Google Cloud and S3 storage buckets:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gs://cmip6</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">s3://cmip6-pds</span></code></p></li>
+</ul>
+<p>The data is primarily <a class="reference external" href="https://zarr.readthedocs.io/en/stable/">Zarr</a>-formatted, with a predetermined and well-defined directory structure to ensure that it is properly organized and classified.
+This directory structure is reflected in the master CSV files located at the root of each bucket, which enumerates all available Zarr stores using their containing directory names as columns to allow for sorting and filtering.</p>
 <div class="section" id="zarr-storage-format">
 <h2>Zarr storage format<a class="headerlink" href="#zarr-storage-format" title="Permalink to this headline">¶</a></h2>
-<p>We have chosen the <a class="reference external" href="https://zarr.readthedocs.io/en/stable/">Zarr object model and storage format</a> for our cloud-based data repositories.
-Each Zarr data store in the CMIP6 collection consists of all of the data, including the grids and metadata, stored in Zarr format.
+<p>Each data store in the CMIP6 collection consists of all of the data, including the grids and metadata, stored in Zarr format.
 This format stores the data as a collection of files consisting of regular text files containing metadata and data files consisting of the data divided into compressed chunks which can be read individually or in parallel, allowing very large datasets to scale more efficiently in the cloud.</p>
-<p>The original datasets, stored in the WCRP/CMIP6 ESGF repositories, consists of <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/">netCDF</a> files.
+<p>The original datasets, stored in the WCRP/CMIP6 ESGF repositories, consist of <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/">netCDF</a> files.
 Each of these datasets typically corresponds to a single variable saved at specified time intervals for the length of a single model run.
 For convenience, these datasets were often divided into multiple netCDF files.
 Our Zarr data stores correspond to the result of concatenating these netCDF files and then storing them as a single Zarr object.
 All of the metadata in the original netCDF files has been preserved, including the licensing information and the CMIP6 persistent identifiers (<code class="docutils literal notranslate"><span class="pre">tracking_ids</span></code>) which are unique for each of the original netCDF files.</p>
 </div>
-<div class="section" id="directory-layout">
-<h2>Directory layout<a class="headerlink" href="#directory-layout" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="directory-structure">
+<h2>Directory structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
 <p>To organize the data there is a list of keywords, each with a <a class="reference external" href="https://github.com/WCRP-CMIP/CMIP6_CVs">controlled vocabulary</a> which has been developed over the many CMIP iterations.
 The keywords categorize the model data in the many ways we might want to search the data.
-For example, to find all available 3 hourly precipitation data from the pre-industrial control runs, we only need to specify the variable, frequency and experiment name.
-The modeling centers all agreed to use the same keywords, each with its own controlled vocabulary.
+For example, to find all available 3-hourly precipitation data from the pre-industrial control runs, we only need to specify the variable, frequency and experiment name.
 In this case, the keywords <code class="docutils literal notranslate"><span class="pre">['variable_id',</span> <span class="pre">'table_id',</span> <span class="pre">'experiment_id']</span></code> will have the values <code class="docutils literal notranslate"><span class="pre">['pr',</span> <span class="pre">'3hr',</span> <span class="pre">'piControl']</span></code>.
 The data are structured in this cloud repository using 8 of these keywords in this order:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cmip6/
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cmip6[-pds]/
 └──&lt;activity_id&gt;/
     └──&lt;institution_id&gt;/
         └──&lt;source_id&gt;/
@@ -163,13 +169,43 @@ The data are structured in this cloud repository using 8 of these keywords in th
 </div>
 <div class="section" id="csv-file-structure">
 <h2>CSV file structure<a class="headerlink" href="#csv-file-structure" title="Permalink to this headline">¶</a></h2>
-<p>A master spreadsheet of all available data is stored in a <a class="reference external" href="https://storage.googleapis.com/cmip6/pangeo-cmip6.csv">simple CSV file</a> in which the first line consists of the column names and each subsequent line specifies a Zarr data store.
-The first 8 column names correspond to the standard CMIP keywords; the two additional columns are:</p>
+<p>There are two different master CSV files enumerating available Zarr data stores located at the root of each bucket; one contains only datasets with no serious issues listed in the official <a class="reference external" href="https://errata.es-doc.org/static/index.html">ESGF Errata Service</a>:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">zstore</span></code>: the URL of the corresponding Zarr data store</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dcpp_init_year</span></code>: optional metadata for convenience when accessing <a class="reference external" href="https://www.wcrp-climate.org/dcp-overview">DCPP</a>-type experiments</p></li>
+<li><p><a class="reference external" href="https://storage.googleapis.com/cmip6/cmip6-zarr-consolidated-stores.csv">https://storage.googleapis.com/cmip6/cmip6-zarr-consolidated-stores.csv</a></p></li>
+<li><p><a class="reference external" href="https://cmip6-pds.s3-us-west-2.amazonaws.com/cmip6-zarr-consolidated-stores.csv">https://cmip6-pds.s3-us-west-2.amazonaws.com/cmip6-zarr-consolidated-stores.csv</a></p></li>
 </ul>
-<p>Although there are currently over 250,000 entries, this text file can be viewed in any spreadsheet application and the entries can be sorted, selected and discovered quickly and efficiently.</p>
+<p>The other contains all available Zarr data stores, including those with serious issues (represented with a <code class="docutils literal notranslate"><span class="pre">-noQC</span></code> label):</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://storage.googleapis.com/cmip6/cmip6-zarr-consolidated-stores-noQC.csv">https://storage.googleapis.com/cmip6/cmip6-zarr-consolidated-stores-noQC.csv</a></p></li>
+<li><p><a class="reference external" href="https://cmip6-pds.s3-us-west-2.amazonaws.com/cmip6-zarr-consolidated-stores-noQC.csv">https://cmip6-pds.s3-us-west-2.amazonaws.com/cmip6-zarr-consolidated-stores-noQC.csv</a></p></li>
+</ul>
+<p>The first 8 column names correspond to the standard CMIP keywords; the next three additional columns are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">zstore</span></code>: URL of the corresponding Zarr data store</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dcpp_init_year</span></code>: optional metadata for convenience when accessing <a class="reference external" href="https://www.wcrp-climate.org/dcp-overview">DCPP</a>-type experiments</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">version</span></code>: dataset version listed on ESGF in YYYYMMDD format</p></li>
+</ul>
+<p>Finally, the <code class="docutils literal notranslate"><span class="pre">-noQC</span></code> variants exclusively include three additional columns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code>: status of the dataset’s issue, if any, using a controlled vocabulary:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">new</span></code>: TODO</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">onhold</span></code>: TODO</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resolved</span></code>: issue has been resolved AND the corrected files have been published on ESGF with a new dataset version</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wontfix</span></code>: issue cannot/won’t be fixed by the data provider; may result in a persistent low severity issue with no consequences to analysis</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">severity</span></code>: severity of the dataset’s issue, if any, using a controlled vocabulary:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">low</span></code>: issue concerns file management (e.g., addition, removal, period extension, etc.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">medium</span></code>: issue concerns metadata (netCDF attributes) without undermining the values of the involved variable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">high</span></code>: issue concerns single point variable or axis values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">critical</span></code>: issue concerns the variable or axis values undermining the analysis; use of this data is strongly discouraged</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">issue_url</span></code>: link to view the issue on ESGF Errata Service</p></li>
+</ul>
+<p>Although there are currently over 250,000 entries, these files can be viewed in any spreadsheet application and the entries can be sorted, selected and discovered quickly and efficiently.</p>
 </div>
 </div>
 
