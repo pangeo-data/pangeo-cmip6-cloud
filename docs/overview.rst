@@ -24,8 +24,7 @@ Directory structure
 -------------------
 To organize the data there is a list of keywords, each with a `controlled vocabulary <https://github.com/WCRP-CMIP/CMIP6_CVs>`_ which has been developed over the many CMIP iterations.
 The keywords categorize the model data in the many ways we might want to search the data.
-For example, to find all available 3 hourly precipitation data from the pre-industrial control runs, we only need to specify the variable, frequency and experiment name.
-The modeling centers all agreed to use the same keywords, each with its own controlled vocabulary.
+For example, to find all available 3-hourly precipitation data from the pre-industrial control runs, we only need to specify the variable, frequency and experiment name.
 In this case, the keywords ``['variable_id', 'table_id', 'experiment_id']`` will have the values ``['pr', '3hr', 'piControl']``.
 The data are structured in this cloud repository using 8 of these keywords in this order::
 
@@ -43,14 +42,38 @@ Each object specified in this way refers to a single Zarr data store.
 
 CSV file structure
 ------------------
-Master CSV files enumerating all available Zarr data stores are located at the root of each bucket, and are available for download:
+There are two different master CSV files enumerating available Zarr data stores located at the root of each bucket; one contains only datasets with no serious issues listed in the official `ESGF Errata Service <https://errata.es-doc.org/static/index.html>`_:
 
 - https://storage.googleapis.com/cmip6/cmip6-zarr-consolidated-stores.csv
 - https://cmip6-pds.s3-us-west-2.amazonaws.com/cmip6-zarr-consolidated-stores.csv
 
-The first 8 column names correspond to the standard CMIP keywords; the two additional columns are:
+The other contains all available Zarr data stores, including those with serious issues (represented with a ``-noQC`` label):
 
-- ``zstore``: the URL of the corresponding Zarr data store
+- https://storage.googleapis.com/cmip6/cmip6-zarr-consolidated-stores-noQC.csv
+- https://cmip6-pds.s3-us-west-2.amazonaws.com/cmip6-zarr-consolidated-stores-noQC.csv
+
+The first 8 column names correspond to the standard CMIP keywords; the next three additional columns are:
+
+- ``zstore``: URL of the corresponding Zarr data store
 - ``dcpp_init_year``: optional metadata for convenience when accessing `DCPP <https://www.wcrp-climate.org/dcp-overview>`_-type experiments
+- ``version``: dataset version listed on ESGF in YYYYMMDD format
+
+Finally, the ``-noQC`` variants exclusively include three additional columns:
+
+- ``status``: status of the dataset's issue, if any, using a controlled vocabulary:
+
+  - ``new``: TODO
+  - ``onhold``: TODO
+  - ``resolved``: issue has been resolved AND the corrected files have been published on ESGF with a new dataset version
+  - ``wontfix``: issue cannot/won’t be fixed by the data provider; may result in a persistent low severity issue with no consequences to analysis
+
+- ``severity``: severity of the dataset's issue, if any, using a controlled vocabulary:
+
+  - ``low``: issue concerns file management (e.g., addition, removal, period extension, etc.)
+  - ``medium``: issue concerns metadata (netCDF attributes) without undermining the values of the involved variable
+  - ``high``: issue concerns single point variable or axis values
+  - ``critical``: issue concerns the variable or axis values undermining the analysis; use of this data is strongly discouraged
+
+- ``issue_url``: link to view the issue on ESGF Errata Service
 
 Although there are currently over 250,000 entries, these files can be viewed in any spreadsheet application and the entries can be sorted, selected and discovered quickly and efficiently.
