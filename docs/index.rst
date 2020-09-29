@@ -17,9 +17,9 @@ Listed below are languages with actively developed Zarr packages; italicized lan
 
 - Python: `zarr-developers/zarr-python <https://github.com/zarr-developers/zarr-python>`_
 - TypeScript: `gzuidhof/zarr.js <https://github.com/gzuidhof/zarr.js/>`_
-- *C++*: `constantinpape/z5 <https://github.com/constantinpape/z5>`_
+- **C++**: `constantinpape/z5 <https://github.com/constantinpape/z5>`_
 - Julia: `meggart/zarr.jl <https://github.com/meggart/Zarr.jl>`_
-- *Java*: `saalfeldlab/n5-zarr <https://github.com/saalfeldlab/n5-zarr>`_
+- **Java**: `saalfeldlab/n5-zarr <https://github.com/saalfeldlab/n5-zarr>`_
 - Scala: `lasersonlab/ndarray.scala <https://github.com/lasersonlab/ndarray.scala>`_
 - C: `Unidata/netcdf-c/libnczarr <https://github.com/Unidata/netcdf-c/tree/master/libnczarr>`_
 
