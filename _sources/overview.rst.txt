@@ -55,14 +55,14 @@ The first 8 column names correspond to the standard CMIP keywords; the next thre
 
 - ``zstore``: URL of the corresponding Zarr data store
 - ``dcpp_init_year``: optional metadata for convenience when accessing `DCPP <https://www.wcrp-climate.org/dcp-overview>`_-type experiments
-- ``version``: dataset version listed on ESGF in YYYYMMDD format
+- ``version``: approximate data of model output file as listed on ESGF in YYYYMMDD format
 
 Finally, the ``-noQC`` variants exclusively include three additional columns:
 
 - ``status``: status of the dataset's issue, if any, using a controlled vocabulary:
 
-  - ``new``: TODO
-  - ``onhold``: TODO
+  - ``new``: issue has been recently raised with no other updates to status
+  - ``onhold``: issue is in the process of being examined or resolved
   - ``resolved``: issue has been resolved AND the corrected files have been published on ESGF with a new dataset version
   - ``wontfix``: issue cannot/won’t be fixed by the data provider; may result in a persistent low severity issue with no consequences to analysis
 

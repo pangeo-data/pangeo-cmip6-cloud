@@ -183,14 +183,14 @@ The data are structured in this cloud repository using 8 of these keywords in th
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">zstore</span></code>: URL of the corresponding Zarr data store</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">dcpp_init_year</span></code>: optional metadata for convenience when accessing <a class="reference external" href="https://www.wcrp-climate.org/dcp-overview">DCPP</a>-type experiments</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">version</span></code>: dataset version listed on ESGF in YYYYMMDD format</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">version</span></code>: approximate data of model output file as listed on ESGF in YYYYMMDD format</p></li>
 </ul>
 <p>Finally, the <code class="docutils literal notranslate"><span class="pre">-noQC</span></code> variants exclusively include three additional columns:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">status</span></code>: status of the dataset’s issue, if any, using a controlled vocabulary:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">new</span></code>: TODO</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">onhold</span></code>: TODO</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">new</span></code>: issue has been recently raised with no other updates to status</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">onhold</span></code>: issue is in the process of being examined or resolved</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">resolved</span></code>: issue has been resolved AND the corrected files have been published on ESGF with a new dataset version</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">wontfix</span></code>: issue cannot/won’t be fixed by the data provider; may result in a persistent low severity issue with no consequences to analysis</p></li>
 </ul>
