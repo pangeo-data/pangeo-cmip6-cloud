@@ -41,8 +41,8 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # a list of builtin themes.
 pygments_style = "sphinx"
 
-html_logo = "_static/small_e_logo.svg"
-html_favicon = "_static/small_e_logo.svg"
+html_logo = "_static/small_e_logo_cropped.png"
+html_favicon = "_static/small_e_logo_cropped.png"
 
 html_theme = "sphinx_rtd_theme"
 html_theme_options = {
