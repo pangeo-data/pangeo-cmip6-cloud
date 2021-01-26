@@ -42,12 +42,12 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 pygments_style = "sphinx"
 
 html_logo = "_static/small_e_logo_cropped.png"
-html_favicon = "_static/small_e_logo_cropped.png"
+html_favicon = "_static/favicon.png"
 
 html_theme = "sphinx_rtd_theme"
 html_theme_options = {
   "collapse_navigation": False,
-  "style_nav_header_background": "#00A3B0" # Pangeo teal
+  "style_nav_header_background": "#5EB130" # Pangeo green
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
