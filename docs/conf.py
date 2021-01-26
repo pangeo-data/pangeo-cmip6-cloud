@@ -13,7 +13,7 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = "Pangeo CMIP6"
-copyright = "2020-%s, Pangeo Community" % datetime.datetime.now().year
+copyright = "2019-%s, Pangeo Community" % datetime.datetime.now().year
 author = "Pangeo Community" 
 
 
@@ -39,8 +39,10 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_favicon = "_static/favicon.png"
 pygments_style = "sphinx"
+
+html_logo = "_static/small_e_logo.svg"
+html_favicon = "_static/small_e_logo.svg"
 
 html_theme = "sphinx_rtd_theme"
 html_theme_options = {
