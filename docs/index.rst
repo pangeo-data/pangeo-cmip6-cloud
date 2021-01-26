@@ -31,9 +31,8 @@ Additionally, a filesystem package for Google Cloud and/or S3 storage is require
 Though optional, a CSV-loading package allows for searching and filtering of the Zarr data stores, which are enumerated in CSV files located at the root of each cloud storage bucket.
 Python users are encouraged to use `xarray <https://xarray.pydata.org/en/stable/>`_, `intake <https://intake.readthedocs.io/en/stable/>`_, and `intake-esm <https://intake-esm.readthedocs.io/en/stable/>`_, which facilitate exploration and interaction with the data through the use of Earth System Model (ESM) collection specifications which are also provided at the root of each bucket.
 
-Documentation
--------------
 .. toctree::
+   :caption: Documentation
    :maxdepth: 2
 
    overview
