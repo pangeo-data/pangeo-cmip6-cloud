@@ -12,10 +12,12 @@ The function takes a Python-native ``MutableMapping`` as input, which can be acq
 
   import gcsfs
   import xarray as xr
-
-  # create a MutableMapping from a store URL
+  # Connect to Google Cloud Storage
   fs = gcsfs.GCSFileSystem(token='anon', access='read_only')
+  
+  # create a MutableMapping from a store URL  
   mapper = fs.get_mapper("gs://cmip6/CMIP6/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/v20200225/")
+  
   # make sure to specify that metadata is consolidated
   ds = xr.open_zarr(mapper, consolidated=True)
 
@@ -150,3 +152,18 @@ When the datasets have finished loading, we can extract any of them like we woul
 
   ds = dsets['ScenarioMIP.THU.CIESM.ssp585.Amon.gr']
   ds
+
+Preprocessing the CMIP6 datasets
+--------------------------------
+Once you are comfortable with the basic `intake-esm` features, you may notice that many datasets cannot be easily combined and manipulated without some time consuming debugging. Julius Busecke's very useful package, `cmip6_preprocessing <https://github.com/jbusecke/cmip6_preprocessing/>`_, can be added which does some of this cleanup for you - especially for the very tricky 'Omon' datasets. See, for example, this `tutorial <https://github.com/jbusecke/cmip6_preprocessing/blob/HEAD/docs/tutorial.ipynb>`_ .
+
+.. code-block:: python
+
+  from cmip6_preprocessing.preprocessing import combined_preprocessing
+
+and then you can use this when calling ``to_dataset_dict``:
+
+.. code-block:: python
+
+  dsets = col_subset.to_dataset_dict(zarr_kwargs={'consolidated': True, 'decode_times':False}, 
+                                     aggregate=True, preprocess=combined_preprocessing)
