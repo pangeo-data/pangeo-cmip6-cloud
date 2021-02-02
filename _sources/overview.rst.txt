@@ -17,7 +17,9 @@ The original datasets, stored in the WCRP/CMIP6 ESGF repositories, consist of `n
 Each of these datasets typically corresponds to a single variable saved at specified time intervals for the length of a single model run.
 For convenience, these datasets were often divided into multiple netCDF files.
 Our Zarr data stores correspond to the result of concatenating these netCDF files and then storing them as a single Zarr object.
-All of the metadata in the original netCDF files has been preserved, including the licensing information and the CMIP6 persistent identifiers (``tracking_ids``) which are unique for each of the original netCDF files.
+All of the metadata in the original netCDF files has been preserved, including the licensing information and the CMIP6 persistent identifiers (``tracking_ids``) which are unique for each of the original netCDF files. 
+
+A Zarr data store ``tracking_id`` consists of a concatenated list of the netCDF ``tracking_ids`` from which it was created. An individual ``tracking_id`` can be looked up at `Handle.net <http://hdl.handle.net/>`_  (e.g., enter "hdl:21.14100/33cbdc29-fbc9-44ab-9e09-5dc7824441cf", which then redirects `here <https://handle-esgf.dkrz.de/lp/21.14100/33cbdc29-fbc9-44ab-9e09-5dc7824441cf/>`_).
 
 Directory structure
 -------------------

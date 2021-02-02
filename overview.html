@@ -197,6 +197,7 @@ Each of these datasets typically corresponds to a single variable saved at speci
 For convenience, these datasets were often divided into multiple netCDF files.
 Our Zarr data stores correspond to the result of concatenating these netCDF files and then storing them as a single Zarr object.
 All of the metadata in the original netCDF files has been preserved, including the licensing information and the CMIP6 persistent identifiers (<code class="docutils literal notranslate"><span class="pre">tracking_ids</span></code>) which are unique for each of the original netCDF files.</p>
+<p>A Zarr data store <code class="docutils literal notranslate"><span class="pre">tracking_id</span></code> consists of a concatenated list of the netCDF <code class="docutils literal notranslate"><span class="pre">tracking_ids</span></code> from which it was created. An individual <code class="docutils literal notranslate"><span class="pre">tracking_id</span></code> can be looked up at <a class="reference external" href="http://hdl.handle.net/">Handle.net</a>  (e.g., enter “<a class="reference external" href="hdl:21.14100/33cbdc29-fbc9-44ab-9e09-5dc7824441cf">hdl:21.14100/33cbdc29-fbc9-44ab-9e09-5dc7824441cf</a>”, which then redirects <a class="reference external" href="https://handle-esgf.dkrz.de/lp/21.14100/33cbdc29-fbc9-44ab-9e09-5dc7824441cf/">here</a>).</p>
 </div>
 <div class="section" id="directory-structure">
 <h2>Directory structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
