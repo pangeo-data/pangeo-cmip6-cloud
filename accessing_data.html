@@ -104,6 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#loading-an-esm-collection">Loading an ESM collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#searching-for-datasets">Searching for datasets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#loading-datasets">Loading datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preprocessing-the-cmip6-datasets">Preprocessing the CMIP6 datasets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pangeo_catalog.html">Pangeo Catalog</a><ul>
@@ -188,10 +189,12 @@ While this can be done using any language whose Zarr package supports the readin
 The function takes a Python-native <code class="docutils literal notranslate"><span class="pre">MutableMapping</span></code> as input, which can be acquired from a Zarr store URL using either <a class="reference external" href="https://gcsfs.readthedocs.io/en/latest/">gcsfs</a> or <a class="reference external" href="https://s3fs.readthedocs.io/en/latest/">s3fs</a>, depending on the cloud provider:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gcsfs</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="c1"># Connect to Google Cloud Storage</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="n">gcsfs</span><span class="o">.</span><span class="n">GCSFileSystem</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s1">&#39;anon&#39;</span><span class="p">,</span> <span class="n">access</span><span class="o">=</span><span class="s1">&#39;read_only&#39;</span><span class="p">)</span>
 
 <span class="c1"># create a MutableMapping from a store URL</span>
-<span class="n">fs</span> <span class="o">=</span> <span class="n">gcsfs</span><span class="o">.</span><span class="n">GCSFileSystem</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s1">&#39;anon&#39;</span><span class="p">,</span> <span class="n">access</span><span class="o">=</span><span class="s1">&#39;read_only&#39;</span><span class="p">)</span>
 <span class="n">mapper</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;gs://cmip6/CMIP6/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/v20200225/&quot;</span><span class="p">)</span>
+
 <span class="c1"># make sure to specify that metadata is consolidated</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -314,6 +317,18 @@ For example, Zarr-based assets can be loaded with the option <code class="docuti
 <p>When the datasets have finished loading, we can extract any of them like we would a value in a Python dictionary:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">dsets</span><span class="p">[</span><span class="s1">&#39;ScenarioMIP.THU.CIESM.ssp585.Amon.gr&#39;</span><span class="p">]</span>
 <span class="n">ds</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="preprocessing-the-cmip6-datasets">
+<h2>Preprocessing the CMIP6 datasets<a class="headerlink" href="#preprocessing-the-cmip6-datasets" title="Permalink to this headline">¶</a></h2>
+<p>Once you are comfortable with the basic <cite>intake-esm</cite> features, you may notice that many datasets cannot be easily combined and manipulated without some time consuming debugging. Julius Busecke’s very useful package, <a class="reference external" href="https://github.com/jbusecke/cmip6_preprocessing/">cmip6_preprocessing</a>, can be added which does some of this cleanup for you - especially for the very tricky ‘Omon’ datasets. See, for example, this <a class="reference external" href="https://github.com/jbusecke/cmip6_preprocessing/blob/HEAD/docs/tutorial.ipynb">tutorial</a> .</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cmip6_preprocessing.preprocessing</span> <span class="kn">import</span> <span class="n">combined_preprocessing</span>
+</pre></div>
+</div>
+<p>and then you can use this when calling <code class="docutils literal notranslate"><span class="pre">to_dataset_dict</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dsets</span> <span class="o">=</span> <span class="n">col_subset</span><span class="o">.</span><span class="n">to_dataset_dict</span><span class="p">(</span><span class="n">zarr_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;consolidated&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;decode_times&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">},</span>
+                                   <span class="n">aggregate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">preprocess</span><span class="o">=</span><span class="n">combined_preprocessing</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
