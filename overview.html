@@ -203,8 +203,8 @@ All of the metadata in the original netCDF files has been preserved, including t
 The keywords categorize the model data in the many ways we might want to search the data.
 For example, to find all available 3-hourly precipitation data from the pre-industrial control runs, we only need to specify the variable, frequency and experiment name.
 In this case, the keywords <code class="docutils literal notranslate"><span class="pre">['variable_id',</span> <span class="pre">'table_id',</span> <span class="pre">'experiment_id']</span></code> will have the values <code class="docutils literal notranslate"><span class="pre">['pr',</span> <span class="pre">'3hr',</span> <span class="pre">'piControl']</span></code>.
-The data are structured in this cloud repository using 8 of these keywords in this order:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cmip6[-pds]/
+The data are structured in this cloud repository using 9 of these keywords in this order:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cmip6[-pds]/CMIP6/
 └──&lt;activity_id&gt;/
     └──&lt;institution_id&gt;/
         └──&lt;source_id&gt;/
@@ -213,6 +213,7 @@ The data are structured in this cloud repository using 8 of these keywords in th
                     └──&lt;table_id&gt;/
                         └──&lt;variable_id&gt;/
                             └──&lt;grid_label&gt;/
+                                └──&lt;version_id&gt;/
 </pre></div>
 </div>
 <p>Each object specified in this way refers to a single Zarr data store.</p>
@@ -221,13 +222,13 @@ The data are structured in this cloud repository using 8 of these keywords in th
 <h2>CSV file structure<a class="headerlink" href="#csv-file-structure" title="Permalink to this headline">¶</a></h2>
 <p>There are two different master CSV files enumerating available Zarr data stores located at the root of each bucket; one contains only datasets with no serious issues listed in the official <a class="reference external" href="https://errata.es-doc.org/static/index.html">ESGF Errata Service</a>:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://storage.googleapis.com/cmip6/cmip6-zarr-consolidated-stores.csv">https://storage.googleapis.com/cmip6/cmip6-zarr-consolidated-stores.csv</a></p></li>
-<li><p><a class="reference external" href="https://cmip6-pds.s3-us-west-2.amazonaws.com/cmip6-zarr-consolidated-stores.csv">https://cmip6-pds.s3-us-west-2.amazonaws.com/cmip6-zarr-consolidated-stores.csv</a></p></li>
+<li><p><a class="reference external" href="https://storage.googleapis.com/cmip6/pangeo-cmip6.csv">https://storage.googleapis.com/cmip6/pangeo-cmip6.csv</a></p></li>
+<li><p><a class="reference external" href="https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.csv">https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.csv</a></p></li>
 </ul>
 <p>The other contains all available Zarr data stores, including those with serious issues (represented with a <code class="docutils literal notranslate"><span class="pre">-noQC</span></code> label):</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://storage.googleapis.com/cmip6/cmip6-zarr-consolidated-stores-noQC.csv">https://storage.googleapis.com/cmip6/cmip6-zarr-consolidated-stores-noQC.csv</a></p></li>
-<li><p><a class="reference external" href="https://cmip6-pds.s3-us-west-2.amazonaws.com/cmip6-zarr-consolidated-stores-noQC.csv">https://cmip6-pds.s3-us-west-2.amazonaws.com/cmip6-zarr-consolidated-stores-noQC.csv</a></p></li>
+<li><p><a class="reference external" href="https://storage.googleapis.com/cmip6/pangeo-cmip6-noQC.csv">https://storage.googleapis.com/cmip6/pangeo-cmip6-noQC.csv</a></p></li>
+<li><p><a class="reference external" href="https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6-noQC.csv">https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6-noQC.csv</a></p></li>
 </ul>
 <p>The first 8 column names correspond to the standard CMIP keywords; the next three additional columns are:</p>
 <ul class="simple">
@@ -255,7 +256,7 @@ The data are structured in this cloud repository using 8 of these keywords in th
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">issue_url</span></code>: link to view the issue on ESGF Errata Service</p></li>
 </ul>
-<p>Although there are currently over 250,000 entries, these files can be viewed in any spreadsheet application and the entries can be sorted, selected and discovered quickly and efficiently.</p>
+<p>Although there are currently over 400,000 entries, these files can be viewed in any spreadsheet application and the entries can be sorted, selected and discovered quickly and efficiently.</p>
 </div>
 </div>
 
