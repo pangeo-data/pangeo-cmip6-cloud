@@ -23,11 +23,13 @@ A Zarr data store ``tracking_id`` consists of a concatenated list of the netCDF 
 
 Directory structure
 -------------------
+**UPDATE: Feb. 1, 2021:** Please note that our zarr store names, and therefore the URLs for our zarr stores,  has recently changed. For example, the prefix is now ``gs://cmip6/CMIP6/`` on GC and ``s3://cmip6-pds/CMIP6/`` on AWS S3. In addition, conforming to the ESGF syntax, we have appended the ``version_id`` (e.g., /v20200101) to the names. 
+
 To organize the data there is a list of keywords, each with a `controlled vocabulary <https://github.com/WCRP-CMIP/CMIP6_CVs>`_ which has been developed over the many CMIP iterations.
 The keywords categorize the model data in the many ways we might want to search the data.
 For example, to find all available 3-hourly precipitation data from the pre-industrial control runs, we only need to specify the variable, frequency and experiment name.
 In this case, the keywords ``['variable_id', 'table_id', 'experiment_id']`` will have the values ``['pr', '3hr', 'piControl']``.
-The data are structured in this cloud repository using 9 of these keywords in this order::
+The data are now structured in this cloud repository using 9 of these keywords in this order::
 
   cmip6[-pds]/CMIP6/
   └──<activity_id>/
@@ -44,15 +46,19 @@ Each object specified in this way refers to a single Zarr data store.
 
 CSV file structure
 ------------------
-There are two different master CSV files enumerating available Zarr data stores located at the root of each bucket; one contains only datasets with no serious issues listed in the official `ESGF Errata Service <https://errata.es-doc.org/static/index.html>`_:
+We maintain CSV files listing the most recent versions of the Zarr data stores, providing the keyword values in columns as well as the dataset URLs and some additional information.  These files allow for rapid searching by keyword using your favorite spreadsheet software.  For example, in python, we generally use the `pandas` package. 
 
-- https://storage.googleapis.com/cmip6/pangeo-cmip6.csv
+There are two different master CSV files located at the root of each bucket; one contains only datasets with no serious issues listed in the official `ESGF Errata Service <https://errata.es-doc.org/static/index.html>`_:
+
+- https://storage.googleapis.com/cmip6/pangeo-cmip6.csv 
 - https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.csv
 
 The other contains all available Zarr data stores, including those with serious issues (represented with a ``-noQC`` label):
 
 - https://storage.googleapis.com/cmip6/pangeo-cmip6-noQC.csv
 - https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6-noQC.csv
+
+We also maintain redundant copies, for backwards compatibility, called "cmip6-zarr-consolidated-stores.csv" and "cmip6-zarr-consolidated-stores-noQC.csv".
 
 The first 8 column names correspond to the standard CMIP keywords; the next three additional columns are:
 

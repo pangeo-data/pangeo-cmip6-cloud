@@ -201,11 +201,12 @@ All of the metadata in the original netCDF files has been preserved, including t
 </div>
 <div class="section" id="directory-structure">
 <h2>Directory structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
+<p><strong>UPDATE: Feb. 1, 2021:</strong> Please note that our zarr store names, and therefore the URLs for our zarr stores,  has recently changed. For example, the prefix is now <code class="docutils literal notranslate"><span class="pre">gs://cmip6/CMIP6/</span></code> on GC and <code class="docutils literal notranslate"><span class="pre">s3://cmip6-pds/CMIP6/</span></code> on AWS S3. In addition, conforming to the ESGF syntax, we have appended the <code class="docutils literal notranslate"><span class="pre">version_id</span></code> (e.g., /v20200101) to the names.</p>
 <p>To organize the data there is a list of keywords, each with a <a class="reference external" href="https://github.com/WCRP-CMIP/CMIP6_CVs">controlled vocabulary</a> which has been developed over the many CMIP iterations.
 The keywords categorize the model data in the many ways we might want to search the data.
 For example, to find all available 3-hourly precipitation data from the pre-industrial control runs, we only need to specify the variable, frequency and experiment name.
 In this case, the keywords <code class="docutils literal notranslate"><span class="pre">['variable_id',</span> <span class="pre">'table_id',</span> <span class="pre">'experiment_id']</span></code> will have the values <code class="docutils literal notranslate"><span class="pre">['pr',</span> <span class="pre">'3hr',</span> <span class="pre">'piControl']</span></code>.
-The data are structured in this cloud repository using 9 of these keywords in this order:</p>
+The data are now structured in this cloud repository using 9 of these keywords in this order:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cmip6[-pds]/CMIP6/
 └──&lt;activity_id&gt;/
     └──&lt;institution_id&gt;/
@@ -222,7 +223,8 @@ The data are structured in this cloud repository using 9 of these keywords in th
 </div>
 <div class="section" id="csv-file-structure">
 <h2>CSV file structure<a class="headerlink" href="#csv-file-structure" title="Permalink to this headline">¶</a></h2>
-<p>There are two different master CSV files enumerating available Zarr data stores located at the root of each bucket; one contains only datasets with no serious issues listed in the official <a class="reference external" href="https://errata.es-doc.org/static/index.html">ESGF Errata Service</a>:</p>
+<p>We maintain CSV files listing the most recent versions of the Zarr data stores, providing the keyword values in columns as well as the dataset URLs and some additional information.  These files allow for rapid searching by keyword using your favorite spreadsheet software.  For example, in python, we generally use the <cite>pandas</cite> package.</p>
+<p>There are two different master CSV files located at the root of each bucket; one contains only datasets with no serious issues listed in the official <a class="reference external" href="https://errata.es-doc.org/static/index.html">ESGF Errata Service</a>:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://storage.googleapis.com/cmip6/pangeo-cmip6.csv">https://storage.googleapis.com/cmip6/pangeo-cmip6.csv</a></p></li>
 <li><p><a class="reference external" href="https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.csv">https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.csv</a></p></li>
@@ -232,6 +234,7 @@ The data are structured in this cloud repository using 9 of these keywords in th
 <li><p><a class="reference external" href="https://storage.googleapis.com/cmip6/pangeo-cmip6-noQC.csv">https://storage.googleapis.com/cmip6/pangeo-cmip6-noQC.csv</a></p></li>
 <li><p><a class="reference external" href="https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6-noQC.csv">https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6-noQC.csv</a></p></li>
 </ul>
+<p>We also maintain redundant copies, for backwards compatibility, called “cmip6-zarr-consolidated-stores.csv” and “cmip6-zarr-consolidated-stores-noQC.csv”.</p>
 <p>The first 8 column names correspond to the standard CMIP keywords; the next three additional columns are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">zstore</span></code>: URL of the corresponding Zarr data store</p></li>
