@@ -48,18 +48,15 @@ CSV file structure
 ------------------
 We maintain CSV files listing the most recent versions of the Zarr data stores, providing the keyword values in columns as well as the dataset URLs and some additional information.  These files allow for rapid searching by keyword using your favorite spreadsheet software.  For example, in python, we generally use the `pandas` package. 
 
-There are two different master CSV files located at the root of the GCS bucket; one contains only datasets with no serious issues listed in the official `ESGF Errata Service <https://errata.es-doc.org/static/index.html>`_:
+There are two different master CSV files located at the root of the buckets; one contains only datasets with no serious issues listed in the official `ESGF Errata Service <https://errata.es-doc.org/static/index.html>`_:
 
 - https://storage.googleapis.com/cmip6/pangeo-cmip6.csv 
+- https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.csv
 
 And the other contains all available Zarr data stores, including those with serious issues (represented with a ``-noQC`` label):
 
 - https://storage.googleapis.com/cmip6/pangeo-cmip6-noQC.csv
-
-For now, in the AWS bucket, we currently only have one master CSV file, which contains ALL of the Zarr stores regardless of ESGF issues:
-
-- https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.csv
-
+- https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6-noQC.csv
 
 For backward compatibility on GCS, we also maintain redundant copies called "cmip6-zarr-consolidated-stores.csv" and "cmip6-zarr-consolidated-stores-noQC.csv".
 
