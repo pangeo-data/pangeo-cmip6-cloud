@@ -224,17 +224,15 @@ The data are now structured in this cloud repository using 9 of these keywords i
 <div class="section" id="csv-file-structure">
 <h2>CSV file structure<a class="headerlink" href="#csv-file-structure" title="Permalink to this headline">¶</a></h2>
 <p>We maintain CSV files listing the most recent versions of the Zarr data stores, providing the keyword values in columns as well as the dataset URLs and some additional information.  These files allow for rapid searching by keyword using your favorite spreadsheet software.  For example, in python, we generally use the <cite>pandas</cite> package.</p>
-<p>There are two different master CSV files located at the root of the GCS bucket; one contains only datasets with no serious issues listed in the official <a class="reference external" href="https://errata.es-doc.org/static/index.html">ESGF Errata Service</a>:</p>
+<p>There are two different master CSV files located at the root of the buckets; one contains only datasets with no serious issues listed in the official <a class="reference external" href="https://errata.es-doc.org/static/index.html">ESGF Errata Service</a>:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://storage.googleapis.com/cmip6/pangeo-cmip6.csv">https://storage.googleapis.com/cmip6/pangeo-cmip6.csv</a></p></li>
+<li><p><a class="reference external" href="https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.csv">https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.csv</a></p></li>
 </ul>
 <p>And the other contains all available Zarr data stores, including those with serious issues (represented with a <code class="docutils literal notranslate"><span class="pre">-noQC</span></code> label):</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://storage.googleapis.com/cmip6/pangeo-cmip6-noQC.csv">https://storage.googleapis.com/cmip6/pangeo-cmip6-noQC.csv</a></p></li>
-</ul>
-<p>For now, in the AWS bucket, we currently only have one master CSV file, which contains ALL of the Zarr stores regardless of ESGF issues:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.csv">https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6.csv</a></p></li>
+<li><p><a class="reference external" href="https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6-noQC.csv">https://cmip6-pds.s3-us-west-2.amazonaws.com/pangeo-cmip6-noQC.csv</a></p></li>
 </ul>
 <p>For backward compatibility on GCS, we also maintain redundant copies called “cmip6-zarr-consolidated-stores.csv” and “cmip6-zarr-consolidated-stores-noQC.csv”.</p>
 <p>The first 8 column names correspond to the standard CMIP keywords; the next three additional columns are:</p>
