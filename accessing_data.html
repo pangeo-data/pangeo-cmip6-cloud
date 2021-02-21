@@ -189,11 +189,26 @@ While this can be done using any language whose Zarr package supports the readin
 The function takes a Python-native <code class="docutils literal notranslate"><span class="pre">MutableMapping</span></code> as input, which can be acquired from a Zarr store URL using either <a class="reference external" href="https://gcsfs.readthedocs.io/en/latest/">gcsfs</a> or <a class="reference external" href="https://s3fs.readthedocs.io/en/latest/">s3fs</a>, depending on the cloud provider:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gcsfs</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
 <span class="c1"># Connect to Google Cloud Storage</span>
 <span class="n">fs</span> <span class="o">=</span> <span class="n">gcsfs</span><span class="o">.</span><span class="n">GCSFileSystem</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s1">&#39;anon&#39;</span><span class="p">,</span> <span class="n">access</span><span class="o">=</span><span class="s1">&#39;read_only&#39;</span><span class="p">)</span>
 
 <span class="c1"># create a MutableMapping from a store URL</span>
 <span class="n">mapper</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;gs://cmip6/CMIP6/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/v20200225/&quot;</span><span class="p">)</span>
+
+<span class="c1"># make sure to specify that metadata is consolidated</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or, for the AWS datasets:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">s3fs</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
+<span class="c1"># Connect to AWS S3 storage</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="n">s3fs</span><span class="o">.</span><span class="n">S3FileSystem</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># create a MutableMapping from a store URL</span>
+<span class="n">mapper</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;s3://cmip6-pds/CMIP6/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/v20200225/&quot;</span><span class="p">)</span>
 
 <span class="c1"># make sure to specify that metadata is consolidated</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -206,7 +221,11 @@ The function takes a Python-native <code class="docutils literal notranslate"><s
 <p>By downloading the master CSV file enumerating all available data stores, we can interact with the spreadsheet through a <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html">pandas DataFrame</a> to search and explore for relevant data using the <a class="reference external" href="https://github.com/WCRP-CMIP/CMIP6_CVs">CMIP6 controlled vocabulary</a>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
+<span class="c1"># for Google Cloud:</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://cmip6.storage.googleapis.com/pangeo-cmip6.csv&quot;</span><span class="p">)</span>
+<span class="c1"># for AWS S3:</span>
+<span class="c1"># df = pd.read_csv(&quot;https://cmip6-pds.s3.amazonaws.com/pangeo-cmip6.csv&quot;)</span>
+
 <span class="n">df_subset</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;activity_id==&#39;CMIP&#39; &amp; table_id==&#39;Amon&#39; &amp; variable_id==&#39;tas&#39;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -214,6 +233,7 @@ The function takes a Python-native <code class="docutils literal notranslate"><s
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the path to a specific zarr store</span>
 <span class="n">zstore</span> <span class="o">=</span> <span class="n">df_subset</span><span class="o">.</span><span class="n">zstore</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">mapper</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="n">zstore</span><span class="p">)</span>
+
 <span class="c1"># open using xarray</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -228,7 +248,11 @@ This eases the burden on the user to manually combine data, while still offering
 <p>To load an ESM collection with intake-esm, the user must provide a valid ESM collection specification as input to intake’s <code class="docutils literal notranslate"><span class="pre">open_esm_datastore()</span></code> function:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">intake</span>
 
+<span class="c1"># for Google Cloud:</span>
 <span class="n">col</span> <span class="o">=</span> <span class="n">intake</span><span class="o">.</span><span class="n">open_esm_datastore</span><span class="p">(</span><span class="s2">&quot;https://storage.googleapis.com/cmip6/pangeo-cmip6.json&quot;</span><span class="p">)</span>
+<span class="c1"># for AWS S3:</span>
+<span class="c1">#col = intake.open_esm_datastore(&quot;https://cmip6-pds.s3.amazonaws.com/pangeo-cmip6.json&quot;)</span>
+
 <span class="n">col</span>
 </pre></div>
 </div>

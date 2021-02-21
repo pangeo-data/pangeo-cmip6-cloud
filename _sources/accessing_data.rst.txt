@@ -12,12 +12,29 @@ The function takes a Python-native ``MutableMapping`` as input, which can be acq
 
   import gcsfs
   import xarray as xr
+  
   # Connect to Google Cloud Storage
   fs = gcsfs.GCSFileSystem(token='anon', access='read_only')
   
   # create a MutableMapping from a store URL  
   mapper = fs.get_mapper("gs://cmip6/CMIP6/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/v20200225/")
   
+  # make sure to specify that metadata is consolidated
+  ds = xr.open_zarr(mapper, consolidated=True)
+
+or, for the AWS datasets:
+
+.. code-block:: python
+
+  import s3fs
+  import xarray as xr
+
+  # Connect to AWS S3 storage
+  fs = s3fs.S3FileSystem(anon=True)
+
+  # create a MutableMapping from a store URL  
+  mapper = fs.get_mapper("s3://cmip6-pds/CMIP6/CMIP/AS-RCEC/TaiESM1/1pctCO2/r1i1p1f1/Amon/hfls/gn/v20200225/")
+
   # make sure to specify that metadata is consolidated
   ds = xr.open_zarr(mapper, consolidated=True)
 
@@ -31,7 +48,11 @@ By downloading the master CSV file enumerating all available data stores, we can
 
   import pandas as pd
 
+  # for Google Cloud:
   df = pd.read_csv("https://cmip6.storage.googleapis.com/pangeo-cmip6.csv")
+  # for AWS S3:
+  # df = pd.read_csv("https://cmip6-pds.s3.amazonaws.com/pangeo-cmip6.csv")
+  
   df_subset = df.query("activity_id=='CMIP' & table_id=='Amon' & variable_id=='tas'")
 
 From here, we can open any of the selected data stores using xarray, providing the value of the ``zstore`` column as input:
@@ -41,6 +62,7 @@ From here, we can open any of the selected data stores using xarray, providing t
   # get the path to a specific zarr store
   zstore = df_subset.zstore.values[-1]
   mapper = fs.get_mapper(zstore)
+  
   # open using xarray
   ds = xr.open_zarr(mapper, consolidated=True)
 
@@ -57,7 +79,11 @@ To load an ESM collection with intake-esm, the user must provide a valid ESM col
 
   import intake
 
+  # for Google Cloud:
   col = intake.open_esm_datastore("https://storage.googleapis.com/cmip6/pangeo-cmip6.json")
+  # for AWS S3:
+  #col = intake.open_esm_datastore("https://cmip6-pds.s3.amazonaws.com/pangeo-cmip6.json")
+  
   col
 
 This gives a summary of the ESM collection, including the total number of Zarr data stores (referred to as assets), along with the total number of datasets these Zarr data stores correspond to.
