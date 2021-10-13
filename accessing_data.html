@@ -351,8 +351,19 @@ For example, Zarr-based assets can be loaded with the option <code class="docuti
 </pre></div>
 </div>
 <p>and then you can use this when calling <code class="docutils literal notranslate"><span class="pre">to_dataset_dict</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dsets</span> <span class="o">=</span> <span class="n">col_subset</span><span class="o">.</span><span class="n">to_dataset_dict</span><span class="p">(</span><span class="n">zarr_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;consolidated&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;decode_times&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">},</span>
-                                   <span class="n">aggregate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">preprocess</span><span class="o">=</span><span class="n">combined_preprocessing</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dsets</span> <span class="o">=</span> <span class="n">col_subset</span><span class="o">.</span><span class="n">to_dataset_dict</span><span class="p">(</span>
+  <span class="n">zarr_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;consolidated&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;decode_times&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">},</span>
+  <span class="n">aggregate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+  <span class="n">preprocess</span><span class="o">=</span><span class="n">combined_preprocessing</span><span class="p">,</span>
+  <span class="n">storage_options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="s1">&#39;anon&#39;</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="c1"># AWS needs a slightly different syntax for the storage options</span>
+<span class="n">dsets</span> <span class="o">=</span> <span class="n">col_subset</span><span class="o">.</span><span class="n">to_dataset_dict</span><span class="p">(</span>
+  <span class="n">zarr_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;consolidated&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;decode_times&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">},</span>
+  <span class="n">aggregate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+  <span class="n">preprocess</span><span class="o">=</span><span class="n">combined_preprocessing</span><span class="p">,</span>
+  <span class="n">storage_options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;anon&#39;</span><span class="p">:</span> <span class="s1">&#39;True&#39;</span><span class="p">}</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
