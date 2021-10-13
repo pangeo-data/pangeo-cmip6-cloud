@@ -191,5 +191,16 @@ and then you can use this when calling ``to_dataset_dict``:
 
 .. code-block:: python
 
-  dsets = col_subset.to_dataset_dict(zarr_kwargs={'consolidated': True, 'decode_times':False}, 
-                                     aggregate=True, preprocess=combined_preprocessing)
+  dsets = col_subset.to_dataset_dict(
+    zarr_kwargs={'consolidated': True, 'decode_times':False}, 
+    aggregate=True,
+    preprocess=combined_preprocessing,
+    storage_options={'token': 'anon'}
+  )
+  # AWS needs a slightly different syntax for the storage options
+  dsets = col_subset.to_dataset_dict(
+    zarr_kwargs={'consolidated': True, 'decode_times':False}, 
+    aggregate=True,
+    preprocess=combined_preprocessing,
+    storage_options={'anon': 'True'}
+  )
