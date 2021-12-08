@@ -7,14 +7,11 @@
 
 import datetime
 
-import sphinx_rtd_theme
-
-
 # -- Project information -----------------------------------------------------
 
-project = "Pangeo CMIP6"
+project = "Pangeo / ESGF Cloud Data Working Group"
 copyright = "2019-%s, Pangeo Community" % datetime.datetime.now().year
-author = "Pangeo Community" 
+author = "Pangeo Community"
 
 
 # -- General configuration ---------------------------------------------------
@@ -23,8 +20,15 @@ author = "Pangeo Community"
 # extensions coming with Sphinx (named "sphinx.ext.*") or your custom
 # ones.
 extensions = [
-  "sphinx_rtd_theme"
+    #"myst_nb",
+    #"sphinx.ext.autodoc",
+    #"sphinx.ext.extlinks",
+    # "numpydoc",
+    #"sphinx_autodoc_typehints",
+    #"sphinx_copybutton",
 ]
+
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -44,11 +48,16 @@ pygments_style = "sphinx"
 html_logo = "_static/small_e_logo_cropped.png"
 html_favicon = "_static/favicon.png"
 
-html_theme = "sphinx_rtd_theme"
+html_theme = "pangeo_sphinx_book_theme"
 html_theme_options = {
-  "collapse_navigation": False,
-  "style_nav_header_background": "#5EB130" # Pangeo green
+    "repository_url": "https://github.com/pangeo-data/pangeo-cmip6-cloud",
+    "repository_branch": "master",
+    "path_to_docs": "docs",
+    "use_repository_button": True,
+    "use_issues_button": True,
+    "use_edit_page_button": True,
 }
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
