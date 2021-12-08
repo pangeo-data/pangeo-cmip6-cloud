@@ -1,5 +1,12 @@
 Pangeo Catalog
 ==============
+
+
+.. warning::
+   The catalog described here is being phased out.
+   It will eventually be replaced by `Pangeo Forge <https://pangeo-forge.org/>`_.
+   
+
 Pangeo Catalog is an open-source project to enumerate and organize cloud-optimized climate data stored across a variety of providers.
 In addition to offering various useful climate datasets in a consolidated location, the project also serves as a means of accessing public ESM data catalogs.
 
