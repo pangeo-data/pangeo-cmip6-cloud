@@ -9,7 +9,7 @@ import datetime
 
 # -- Project information -----------------------------------------------------
 
-project = "Pangeo CMIP6"
+project = "Pangeo / ESGF Cloud Data Working Group"
 copyright = "2019-%s, Pangeo Community" % datetime.datetime.now().year
 author = "Pangeo Community"
 
