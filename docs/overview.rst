@@ -110,3 +110,20 @@ Finally, the ``-noQC`` variants exclusively include three additional columns:
 - ``issue_url``: link to view the issue on ESGF Errata Service
 
 There are currently over 400,000 entries - which is too large for Google Spreadsheets, but can be viewed in most standard spreadsheet applications and the entries can be sorted, selected and discovered quickly and efficiently.  We find that importing them as a python ``pandas`` dataframe is very useful.
+
+NetCDF Data Overview
+==================
+
+Description and data locations
+----------------------------
+
+CMIP6 netcdf data in the cloud can be found in AWS S3 storage. 
+
+- ``s3://esgf-world`` (part of the `AWS Open Data Sponsorship Program <https://aws.amazon.com/opendata/`_public-datasets/>`_). 
+
+The data is in NetCDF format, with a predetermined and well-defined directory structure to ensure that it is properly organized and classified. This directory structure is reflected in the CSV files located `here <https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz>`_, which enumerates all available netcdf datasets using their containing directory names as columns to allow for sorting and filtering.The names of the columns adhere to the CMIP6 controlled vocabulary whenever  available. More CMIP6 netcdf data is being added incrementally to the S3 storage bucket, through a cloud based experimental Earth System Grid Federation (ESGF) node. 
+
+More information can be found in `AWS registry of open data on AWS <https://registry.opendata.aws/cmip6/>`_.
+
+
+
