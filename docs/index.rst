@@ -17,3 +17,4 @@ documentation for accessing the cloud data.
    overview
    accessing_data
    pangeo_catalog
+   more_info
