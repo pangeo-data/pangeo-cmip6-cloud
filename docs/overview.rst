@@ -121,7 +121,7 @@ CMIP6 netcdf data in the cloud can be found in AWS S3 storage.
 
 - ``s3://esgf-world`` (part of the `AWS Open Data Sponsorship Program <https://aws.amazon.com/opendata/`_public-datasets/>`_). 
 
-The data is in NetCDF format, with a predetermined and well-defined directory structure to ensure that it is properly organized and classified. This directory structure is reflected in the CSV files located `here <https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz>`_, which enumerates all available netcdf datasets using their containing directory names as columns to allow for sorting and filtering.The names of the columns adhere to the CMIP6 controlled vocabulary whenever  available. One can use the ` AWS S3 explorer <https://esgf-world.s3.amazonaws.com/index.html>`_ to quickly explore these data holdings. 
+The data is in NetCDF format, with a predetermined and well-defined directory structure to ensure that it is properly organized and classified. This directory structure is reflected in the CSV files located `here <https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz>`_, which enumerates all available netcdf datasets using their containing directory names as columns to allow for sorting and filtering.The names of the columns adhere to the CMIP6 controlled vocabulary whenever  available. One can use the `AWS S3 explorer <https://esgf-world.s3.amazonaws.com/index.html>`_ to quickly explore these data holdings. 
 
 These datasets are also linked from the `AWS registry of open data on AWS <https://registry.opendata.aws/cmip6/>`_.
 
