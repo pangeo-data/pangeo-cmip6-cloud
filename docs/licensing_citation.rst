@@ -1,8 +1,8 @@
 Data Licensing and Citations
-======================
+============================
 
 Data citations and contact info
---------------------------------
+-------------------------------
 
 Please follow `CMIP6 Terms of use <https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-1.html>`_ to appropriately cite the CMIP6 data.
 
