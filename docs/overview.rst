@@ -130,7 +130,7 @@ Directory structure
 
 The directory structure (or the prefixes) adhere to the CMIP6 Data Reference Syntax and CMIP6 Controlled Vocabulary to facilitate building of automated tools to build data catalogs and other utilities to aid in data analysis. 
 
-Here is an example: s3://esgf-world/CMIP6/AerChemMIP/NOAA-GFDL/GFDL-ESM4/hist-piNTCF/r1i1p1f1/Amon/tas/gr1/v20180701/tas_Amon_GFDL-ESM4_hist-piNTCF_r1i1p1f1_gr1_185001-194912.nc (appears as the column path in the CSV file located `here <https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz>`_)
+Here is an example: ``s3://esgf-world/CMIP6/AerChemMIP/NOAA-GFDL/GFDL-ESM4/hist-piNTCF/r1i1p1f1/Amon/tas/gr1/v20180701/tas_Amon_GFDL-ESM4_hist-piNTCF_r1i1p1f1_gr1_185001-194912.nc`` (appears as the column path in the CSV file located `here <https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz>`_)
 
 where: 
 
