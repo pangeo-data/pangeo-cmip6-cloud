@@ -110,3 +110,52 @@ Finally, the ``-noQC`` variants exclusively include three additional columns:
 - ``issue_url``: link to view the issue on ESGF Errata Service
 
 There are currently over 400,000 entries - which is too large for Google Spreadsheets, but can be viewed in most standard spreadsheet applications and the entries can be sorted, selected and discovered quickly and efficiently.  We find that importing them as a python ``pandas`` dataframe is very useful.
+
+NetCDF Data Overview
+====================
+
+Data locations
+-------------------------------
+
+CMIP6 netcdf data in the cloud can be found in AWS S3 storage. 
+
+- ``s3://esgf-world`` (part of the `AWS Open Data Sponsorship Program <https://aws.amazon.com/opendata/`_public-datasets/>`_). 
+
+The data is in NetCDF format, with a predetermined and well-defined directory structure to ensure that it is properly organized and classified. This directory structure is reflected in the CSV files located `here <https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz>`_, which enumerates all available netcdf datasets using their containing directory names as columns to allow for sorting and filtering.The names of the columns adhere to the CMIP6 controlled vocabulary whenever  available. One can use the `AWS S3 explorer <https://esgf-world.s3.amazonaws.com/index.html>`_ to quickly explore these data holdings. 
+
+These datasets are also linked from the `AWS registry of open data on AWS <https://registry.opendata.aws/cmip6/>`_.
+
+Directory structure 
+-------------------
+
+The directory structure (or the prefixes) adhere to the CMIP6 Data Reference Syntax and CMIP6 Controlled Vocabulary to facilitate building of automated tools to build data catalogs and other utilities to aid in data analysis. 
+
+Here is an example: ``s3://esgf-world/CMIP6/AerChemMIP/NOAA-GFDL/GFDL-ESM4/hist-piNTCF/r1i1p1f1/Amon/tas/gr1/v20180701/tas_Amon_GFDL-ESM4_hist-piNTCF_r1i1p1f1_gr1_185001-194912.nc`` (appears as the column path in the CSV file located `here <https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz>`_)
+
+where: 
+
+- ``esgf-world`` is the name of the S3 bucket with CMIP6 NetCDF holdings (subset) 
+- ``CMIP6`` is the project_id
+- ``AerChemMIP`` is the name of the MIP (Model Intercomparison Project) 
+- ``NOAA-GFDL`` is the institution_id 
+- ``GFDL-ESM4`` is the source_id (i.e., the model)
+- ``hist-piNTCF`` is the experiment_id
+- ``r1i1p1f1`` is the member_id (i.e ensemble member. r,i,p stand for realization, initiatialization, physics, forcing respectively)
+- ``Amon`` is the table_id (i.e. the MIP table. Amon stands for atmos monthly)
+- ``tas`` is the variable_id 
+- ``gr1`` is the grid_label (in this example, r in "gr1" stands for regridded)
+- ``v20180701`` is the version_id
+- ``tas_Amon_GFDL-ESM4_hist-piNTCF_r1i1p1f1_gr1_185001-194912.nc`` is the file_name
+
+More CMIP6 netcdf data is being added incrementally to the S3 storage bucket, through a cloud based experimental Earth System Grid Federation (ESGF) node. 
+
+CSV File Structure 
+-------------------
+
+The `CSV file <https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz>`_), also known as the intake-esm catalog is a  CSV file listing the netcdf objects in the esgf-world bucket, providing the keyword values in columns as well as the dataset URLs and some additional information. The column names use CMIP6 controlled vocabulary as indicated in the section above. These files allow for rapid searching by keyword using your favorite spreadsheet software. For example, in python, we generally use the pandas package. If you'd like to use them in your data analysis directly, you can also leverage xarray and dask. An example can be found `here <https://github.com/aradhakrishnanGFDL/gfdl-aws-analysis/blob/community/examples/intake-esm-s3-nc-simple-access.ipynb>`_. 
+
+
+
+
+
+
