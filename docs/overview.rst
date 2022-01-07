@@ -134,7 +134,7 @@ Here is an example: ``s3://esgf-world/CMIP6/AerChemMIP/NOAA-GFDL/GFDL-ESM4/hist-
 
 where: 
 
-- esgf-world is the name of the S3 bucket with CMIP6 NetCDF holdings (subset) 
+- ``esgf-world`` is the name of the S3 bucket with CMIP6 NetCDF holdings (subset) 
 - CMIP6 is the project_id
 - AerChemMIP is the name of the MIP (Model Intercomparison Project) 
 - NOAA-GFDL is the institution_id 
