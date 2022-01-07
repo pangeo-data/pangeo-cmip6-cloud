@@ -11,7 +11,7 @@ Please follow `CMIP6 Terms of use <https://pcmdi.llnl.gov/CMIP6/TermsOfUse/Terms
 
 .. topic:: Example 
 
-    Here is the data reference template.
+    Following is the data reference template.
     Authors (Publication Year). Title. Version YYYYMMDD Earth System Grid Federation. doi. 
 
     `Here <https://cera-www.dkrz.de/WDCC/ui/cerasearch/cmip6?input=CMIP6.CMIP.NOAA-GFDL.GFDL-ESM4>`_ is an example of the citation landing page
