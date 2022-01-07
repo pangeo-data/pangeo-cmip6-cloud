@@ -14,12 +14,12 @@ Data citations and contact info
 
     `Here <https://cera-www.dkrz.de/WDCC/ui/cerasearch/cmip6?input=CMIP6.CMIP.NOAA-GFDL.GFDL-ESM4>`_ is an example of the citation landing page
 
-.. seealso:: `CMIP6 Terms of use <https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-1.html>`_ to appropriately cite the CMIP6 data.
-
 
 3. Cite, as appropriate, one or more of the CMIP6 GMD special issue articles
 
 .. note:: For questions about the data, please use the modeling center dataset contacts, as listed under the contacts field on the `citation landing pages <https://cera-www.dkrz.de/WDCC/ui/cerasearch/cmip6?input=CMIP6.CMIP.NOAA-GFDL.GFDL-ESM4>`_.
+
+.. seealso:: `CMIP6 Terms of use <https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-1.html>`_ to appropriately cite the CMIP6 data.
 
 Data licensing
 ---------------
