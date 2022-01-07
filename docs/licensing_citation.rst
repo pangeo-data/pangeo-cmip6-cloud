@@ -6,7 +6,7 @@ Data citations and contact info
 
 Please follow `CMIP6 Terms of use <https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-1.html>`_ to appropriately cite the CMIP6 data.
 
-1. Go to the `_Citation Search API <http://bit.ly/CMIP6_Citation_Search>`_ and locate the DOI for the data you are looking for.
+1. Go to the `Citation Search API <http://bit.ly/CMIP6_Citation_Search>`_ and locate the DOI for the data you are looking for.
 2. Use the data reference template as follows to cite the data. Please ensure you use the latest versions by checking the `_CMIP6 errata pages <https://errata.es-doc.org/static/index.html>`_. 
 
 - *Here is the data reference template.*
