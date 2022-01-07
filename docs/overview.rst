@@ -135,17 +135,17 @@ Here is an example: ``s3://esgf-world/CMIP6/AerChemMIP/NOAA-GFDL/GFDL-ESM4/hist-
 where: 
 
 - ``esgf-world`` is the name of the S3 bucket with CMIP6 NetCDF holdings (subset) 
-- CMIP6 is the project_id
-- AerChemMIP is the name of the MIP (Model Intercomparison Project) 
-- NOAA-GFDL is the institution_id 
-- GFDL-ESM4 is the source_id (i.e., the model)
-- hist-piNTCF is the experiment_id
-- r1i1p1f1 is the member_id (i.e ensemble member. r,i,p stand for realization, initiatialization, physics, forcing respectively)
-- Amon is the table_id (i.e. the MIP table. Amon stands for atmos monthly)
-- tas is the variable_id 
-- gr1 is the grid_label (in this example, r in "gr1" stands for regridded)
-- v20180701 is the version_id
-- tas_Amon_GFDL-ESM4_hist-piNTCF_r1i1p1f1_gr1_185001-194912.nc is the file_name
+- ``CMIP6`` is the project_id
+- ``AerChemMIP`` is the name of the MIP (Model Intercomparison Project) 
+- ``NOAA-GFDL`` is the institution_id 
+- ``GFDL-ESM4`` is the source_id (i.e., the model)
+- ``hist-piNTCF`` is the experiment_id
+- ``r1i1p1f1`` is the member_id (i.e ensemble member. r,i,p stand for realization, initiatialization, physics, forcing respectively)
+- ``Amon`` is the table_id (i.e. the MIP table. Amon stands for atmos monthly)
+- ``tas`` is the variable_id 
+- ``gr1`` is the grid_label (in this example, r in "gr1" stands for regridded)
+- ``v20180701`` is the version_id
+- ``tas_Amon_GFDL-ESM4_hist-piNTCF_r1i1p1f1_gr1_185001-194912.nc`` is the file_name
 
 More CMIP6 netcdf data is being added incrementally to the S3 storage bucket, through a cloud based experimental Earth System Grid Federation (ESGF) node. 
 
