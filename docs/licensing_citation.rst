@@ -1,13 +1,14 @@
 Data Licensing and Citations
 ============================
 
-Data citations and contact info
--------------------------------
+
+Data citations
+--------------
 
 1. Go to the `Citation Search API <http://bit.ly/CMIP6_Citation_Search>`_ and locate the DOI for the data you are looking for.
 2. Use the data reference template as follows to cite the data. Please ensure you use the latest versions by checking the `_CMIP6 errata pages <https://errata.es-doc.org/static/index.html>`_. 
 
-.. topic:: Example 
+.. seealso:: 
 
     Following is the data reference template.
     Authors (Publication Year). Title. Version YYYYMMDD Earth System Grid Federation. doi. 
@@ -24,6 +25,6 @@ Data citations and contact info
 Data licensing
 ---------------
 
-Please refer to the *license global attribute* in the NetCDF header to determine the licensing agreement for the data you're working with.  
+Please refer to the **license global attribute** in the NetCDF header to determine the licensing agreement for the data you're working with.  
 
-You can also find *license agreement in the data citation landing pages* or `here <http://bit.ly/CMIP6_Citation_Search>`_under the License column.
+You can also find **license agreement in the data citation landing pages** or `here <http://bit.ly/CMIP6_Citation_Search>`_under the License column.
