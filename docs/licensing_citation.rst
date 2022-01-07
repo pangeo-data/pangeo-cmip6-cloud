@@ -9,10 +9,10 @@ Please follow `CMIP6 Terms of use <https://pcmdi.llnl.gov/CMIP6/TermsOfUse/Terms
 1. Go to the Citation Search API and locate the DOI for the data you are looking for.
 2. Use the data reference template as follows to cite the data. Please ensure you use the latest versions by checking the `_CMIP6 errata pages <https://errata.es-doc.org/static/index.html>`_. 
 
-- Here is the data reference template.
+- *Here is the data reference template.*
     Authors (Publication Year). Title. Version YYYYMMDD Earth System Grid Federation. doi. 
 
-See an example of the citation landing page `here <https://cera-www.dkrz.de/WDCC/ui/cerasearch/cmip6?input=CMIP6.CMIP.NOAA-GFDL.GFDL-ESM4>`_. 
+**See an example of the citation landing page `here **<https://cera-www.dkrz.de/WDCC/ui/cerasearch/cmip6?input=CMIP6.CMIP.NOAA-GFDL.GFDL-ESM4>`_. 
 
 3. Cite, as appropriate, one or more of the CMIP6 GMD special issue articles
 
