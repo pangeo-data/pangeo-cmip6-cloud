@@ -4,8 +4,6 @@ Data Licensing and Citations
 Data citations and contact info
 -------------------------------
 
-Please follow `CMIP6 Terms of use <https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-1.html>`_ to appropriately cite the CMIP6 data.
-
 1. Go to the `Citation Search API <http://bit.ly/CMIP6_Citation_Search>`_ and locate the DOI for the data you are looking for.
 2. Use the data reference template as follows to cite the data. Please ensure you use the latest versions by checking the `_CMIP6 errata pages <https://errata.es-doc.org/static/index.html>`_. 
 
@@ -15,6 +13,9 @@ Please follow `CMIP6 Terms of use <https://pcmdi.llnl.gov/CMIP6/TermsOfUse/Terms
     Authors (Publication Year). Title. Version YYYYMMDD Earth System Grid Federation. doi. 
 
     `Here <https://cera-www.dkrz.de/WDCC/ui/cerasearch/cmip6?input=CMIP6.CMIP.NOAA-GFDL.GFDL-ESM4>`_ is an example of the citation landing page
+
+.. seealso:: `CMIP6 Terms of use <https://pcmdi.llnl.gov/CMIP6/TermsOfUse/TermsOfUse6-1.html>`_ to appropriately cite the CMIP6 data.
+
 
 3. Cite, as appropriate, one or more of the CMIP6 GMD special issue articles
 
