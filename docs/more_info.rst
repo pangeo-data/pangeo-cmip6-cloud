@@ -1,4 +1,4 @@
-Additional Information
+Data Licensing and Citations
 ======================
 
 Data citations and contact info
