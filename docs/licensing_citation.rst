@@ -27,4 +27,4 @@ Data licensing
 
 Please refer to the **license global attribute** in the NetCDF header to determine the licensing agreement for the data you're working with.  
 
-You can also find **license agreement in the data citation landing pages** or `here <http://bit.ly/CMIP6_Citation_Search>`_under the License column.
+You can also find license agreement in the data citation landing pages or `here <http://bit.ly/CMIP6_Citation_Search>`_under the License column.
