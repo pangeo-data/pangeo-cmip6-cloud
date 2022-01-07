@@ -31,7 +31,7 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <link rel="shortcut icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -145,7 +145,7 @@
                 data-placement="left">.rst</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -181,37 +181,66 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#requirements">
-   Requirements
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Zarr Data Overview
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#requirements">
+     Requirements
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-locations">
+     Data Locations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#zarr-storage-format">
+     Zarr storage format
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#directory-structure">
+     Directory structure
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#csv-file-structure">
+     CSV file structure
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-locations">
-   Data Locations
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#netcdf-data-overview">
+   NetCDF Data Overview
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#zarr-storage-format">
-   Zarr storage format
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#directory-structure">
-   Directory structure
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#csv-file-structure">
-   CSV file structure
-  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Data locations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     Directory structure
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     CSV File Structure
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -221,7 +250,79 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Zarr Data Overview</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Zarr Data Overview
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#requirements">
+     Requirements
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-locations">
+     Data Locations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#zarr-storage-format">
+     Zarr storage format
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#directory-structure">
+     Directory structure
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#csv-file-structure">
+     CSV file structure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#netcdf-data-overview">
+   NetCDF Data Overview
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Data locations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     Directory structure
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     CSV File Structure
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="section" id="zarr-data-overview">
@@ -333,12 +434,49 @@ The data are now structured in this cloud repository using 9 of these keywords i
 <p>There are currently over 400,000 entries - which is too large for Google Spreadsheets, but can be viewed in most standard spreadsheet applications and the entries can be sorted, selected and discovered quickly and efficiently.  We find that importing them as a python <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dataframe is very useful.</p>
 </div>
 </div>
+<div class="section" id="netcdf-data-overview">
+<h1>NetCDF Data Overview<a class="headerlink" href="#netcdf-data-overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Data locations<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>CMIP6 netcdf data in the cloud can be found in AWS S3 storage.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">s3://esgf-world</span></code> (part of the <a class="reference external" href="https://aws.amazon.com/opendata/`_public-datasets/">AWS Open Data Sponsorship Program</a>).</p></li>
+</ul>
+<p>The data is in NetCDF format, with a predetermined and well-defined directory structure to ensure that it is properly organized and classified. This directory structure is reflected in the CSV files located <a class="reference external" href="https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz">here</a>, which enumerates all available netcdf datasets using their containing directory names as columns to allow for sorting and filtering.The names of the columns adhere to the CMIP6 controlled vocabulary whenever  available. One can use the <a class="reference external" href="https://esgf-world.s3.amazonaws.com/index.html">AWS S3 explorer</a> to quickly explore these data holdings.</p>
+<p>These datasets are also linked from the <a class="reference external" href="https://registry.opendata.aws/cmip6/">AWS registry of open data on AWS</a>.</p>
+</div>
+<div class="section" id="id4">
+<h2>Directory structure<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>The directory structure (or the prefixes) adhere to the CMIP6 Data Reference Syntax and CMIP6 Controlled Vocabulary to facilitate building of automated tools to build data catalogs and other utilities to aid in data analysis.</p>
+<p>Here is an example: <code class="docutils literal notranslate"><span class="pre">s3://esgf-world/CMIP6/AerChemMIP/NOAA-GFDL/GFDL-ESM4/hist-piNTCF/r1i1p1f1/Amon/tas/gr1/v20180701/tas_Amon_GFDL-ESM4_hist-piNTCF_r1i1p1f1_gr1_185001-194912.nc</span></code> (appears as the column path in the CSV file located <a class="reference external" href="https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz">here</a>)</p>
+<p>where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">esgf-world</span></code> is the name of the S3 bucket with CMIP6 NetCDF holdings (subset)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CMIP6</span></code> is the project_id</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AerChemMIP</span></code> is the name of the MIP (Model Intercomparison Project)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NOAA-GFDL</span></code> is the institution_id</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GFDL-ESM4</span></code> is the source_id (i.e., the model)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hist-piNTCF</span></code> is the experiment_id</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r1i1p1f1</span></code> is the member_id (i.e ensemble member. r,i,p stand for realization, initiatialization, physics, forcing respectively)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Amon</span></code> is the table_id (i.e. the MIP table. Amon stands for atmos monthly)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tas</span></code> is the variable_id</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gr1</span></code> is the grid_label (in this example, r in “gr1” stands for regridded)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">v20180701</span></code> is the version_id</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tas_Amon_GFDL-ESM4_hist-piNTCF_r1i1p1f1_gr1_185001-194912.nc</span></code> is the file_name</p></li>
+</ul>
+<p>More CMIP6 netcdf data is being added incrementally to the S3 storage bucket, through a cloud based experimental Earth System Grid Federation (ESGF) node.</p>
+</div>
+<div class="section" id="id6">
+<h2>CSV File Structure<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz">CSV file</a>), also known as the intake-esm catalog is a  CSV file listing the netcdf objects in the esgf-world bucket, providing the keyword values in columns as well as the dataset URLs and some additional information. The column names use CMIP6 controlled vocabulary as indicated in the section above. These files allow for rapid searching by keyword using your favorite spreadsheet software. For example, in python, we generally use the pandas package. If you’d like to use them in your data analysis directly, you can also leverage xarray and dask. An example can be found <a class="reference external" href="https://github.com/aradhakrishnanGFDL/gfdl-aws-analysis/blob/community/examples/intake-esm-s3-nc-simple-access.ipynb">here</a>.</p>
+</div>
+</div>
 
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="background.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -355,19 +493,17 @@ The data are now structured in this cloud repository using 9 of these keywords i
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Pangeo Community<br/>
-        
-            &copy; Copyright 2019-2021, Pangeo Community.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Pangeo Community<br/>
+    
+        &copy; Copyright 2019-2022, Pangeo Community.<br/>
+  </p>
+</footer>
 </main>
 
 
