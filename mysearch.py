@@ -36,11 +36,12 @@ def esgf_search(search, server="https://esgf-node.llnl.gov/esg-search/search",
             url_keys += ["{}={}".format(k, payload[k])]
 
         url = "{}/?{}".format(server, "&".join(url_keys))
+        print(url)
         r = client.get(url)
         r.raise_for_status()
         resp = r.json()["response"]
         numFound = int(resp["numFound"])
-        
+
         resp = resp["docs"]
         offset += len(resp)
         #print(offset,numFound,len(resp))
@@ -55,7 +56,7 @@ def esgf_search(search, server="https://esgf-node.llnl.gov/esg-search/search",
                         url = url.replace('.html', '')
                     dataset_url = url
             all_frames += [[dataset_id,dataset_url,dataset_size]]
-        
+
     ddict = {}
     item = 0
     for item, alist in enumerate(all_frames):
@@ -75,12 +76,12 @@ def esgf_search(search, server="https://esgf-node.llnl.gov/esg-search/search",
        print('empty search response')
        return dz
 
-    dz = dz.rename(columns={0: "activity_id", 1: "institution_id", 2:"source_id", 
+    dz = dz.rename(columns={0: "activity_id", 1: "institution_id", 2:"source_id",
                             3:"experiment_id",4:"member_id",5:"table_id",
                             6:"variable_id",7:"grid_label",8:"version_id",
                             9:"ncfile",10:"file_size",11:"url",12:"data_node"})
 
-    
+
     dz['ds_dir'] = dz.apply(lambda row: target_format % row,axis=1)
     dz['node_order'] = [node_pref[s] for s in dz.data_node ]
     dz['start'] = [s.split('_')[-1].split('-')[0] for s in dz.ncfile ]
@@ -91,7 +92,7 @@ def esgf_search(search, server="https://esgf-node.llnl.gov/esg-search/search",
        # remove all 999 nodes
        dz = dz[dz.node_order != 999]
 
-       # keep only best node 
+       # keep only best node
        dz = dz.sort_values(by=['node_order'])
        dz = dz.drop_duplicates(subset =["ds_dir","ncfile","version_id"],keep='first')
 
