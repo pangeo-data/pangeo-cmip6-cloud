@@ -46,4 +46,11 @@ df = esgf_search(search_facets, server=ESGF_site) # this modifies the dict insid
 
 # get list of urls
 urls = df['url'].tolist()
+
+# sort urls in decending time order (to be able to pass them directly to the pangeo-forge recipe)
+end_dates = [url.split('-')[-1].replace('.nc') for url in urls]
+urls = [url for _,url in sorted(zip(end_dates,urls))]
+
+# TODO Check that there are no gaps or duplicates.
+
 print(urls)
