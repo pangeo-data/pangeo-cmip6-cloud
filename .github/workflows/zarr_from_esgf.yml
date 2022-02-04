@@ -1,0 +1,15 @@
+on:
+  workflow_dispatch:
+    inputs:
+      instance_id:
+        description: '{MIP_ERA}.{ACTIVITY_ID}.{INSTITUTION_ID}.{SOURCE_ID}.{EXPERIMENT_ID}.{MEMBER_ID}.{TABLE_ID}.{VARIABLE_ID}.{GRID_LABEL}.{VERSION}'
+        required: true
+
+jobs:
+  log-the-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "instance_id: $instance_id"
+        env:
+          instance_id: ${{ github.event.inputs.instance_id }}
