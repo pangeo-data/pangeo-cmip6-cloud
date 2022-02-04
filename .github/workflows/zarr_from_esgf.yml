@@ -2,7 +2,8 @@ on:
   workflow_dispatch:
     inputs:
       instance_id:
-        description: '{MIP_ERA}.{ACTIVITY_ID}.{INSTITUTION_ID}.{SOURCE_ID}.{EXPERIMENT_ID}.{MEMBER_ID}.{TABLE_ID}.{VARIABLE_ID}.{GRID_LABEL}.{VERSION}'
+        description: "instance_id"
+        default: "{MIP_ERA}.{ACTIVITY_ID}.{INSTITUTION_ID}.{SOURCE_ID}.{EXPERIMENT_ID}.{MEMBER_ID}.{TABLE_ID}.{VARIABLE_ID}.{GRID_LABEL}.{VERSION}"
         required: true
 
 jobs:
