@@ -1,3 +1,5 @@
+name: Build CMIP6 Zarr from ESGF
+
 on:
   workflow_dispatch:
     inputs:
@@ -10,7 +12,9 @@ jobs:
   log-the-inputs:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "instance_id: $instance_id"
-        env:
-          instance_id: ${{ github.event.inputs.instance_id }}
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    - run: pip install pangeo_forge_recipes
+    - run: python zarr_from_esgf.py ${{ github.event.inputs.instance_id }}

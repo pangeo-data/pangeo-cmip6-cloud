@@ -1,7 +1,5 @@
 import sys
-from rich import print
 import logging
-import sys
 import tempfile
 
 from fsspec.implementations.local import LocalFileSystem
