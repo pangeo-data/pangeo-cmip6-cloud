@@ -1,0 +1,23 @@
+name: Build CMIP6 Zarr from ESGF
+
+on:
+  workflow_dispatch:
+    inputs:
+      instance_id:
+        description: "instance_id"
+        default: "{MIP_ERA}.{ACTIVITY_ID}.{INSTITUTION_ID}.{SOURCE_ID}.{EXPERIMENT_ID}.{MEMBER_ID}.{TABLE_ID}.{VARIABLE_ID}.{GRID_LABEL}.{VERSION}"
+        required: true
+
+jobs:
+  build-zarr:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    - run: >
+        pip install
+        git+https://github.com/pangeo-forge/pangeo-forge-recipes.git
+        mypy_extensions gcsfs netCDF4 h5netcdf
+    - run: python zarr_from_esgf.py ${{ github.event.inputs.instance_id }}
