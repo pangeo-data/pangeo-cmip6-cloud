@@ -1,0 +1,22 @@
+name: test-csv-upload
+
+on: workflow_dispatch
+
+jobs:
+  authenticate-and-upload-dummy:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v2
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0.6.0'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - run: >
+          pip install gcsfs
+      - id: 'upload-script'
+        run: python upload_dummy.py
