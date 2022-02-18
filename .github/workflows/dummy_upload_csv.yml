@@ -4,6 +4,7 @@ on: workflow_dispatch
 
 jobs:
   authenticate-and-upload-dummy:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
