@@ -1,9 +1,9 @@
-name: test-csv-upload
+name: remove-retractions-from-catalog
 
 on: workflow_dispatch
 
 jobs:
-  authenticate-and-upload-dummy:
+  auth-filter-upload:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
@@ -19,4 +19,4 @@ jobs:
       - run: >
           pip install gcsfs
       - id: 'upload-script'
-        run: python upload_dummy.py
+        run: create_filtered_catalog.py
