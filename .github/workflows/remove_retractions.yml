@@ -17,6 +17,6 @@ jobs:
         with:
           python-version: '3.8'
       - run: >
-          pip install gcsfs
+          pip install gcsfs tqdm
       - id: 'upload-script'
         run: python create_filtered_catalog.py
