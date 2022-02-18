@@ -12,7 +12,7 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0.6.0'
         with:
-          credentials_json: '${{ secrets.GCP_SERVICE_ACCOUNT }}'
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
       - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
