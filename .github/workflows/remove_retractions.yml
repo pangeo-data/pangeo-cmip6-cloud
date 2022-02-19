@@ -1,6 +1,9 @@
 name: remove-retractions-from-catalog
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+  schedule:
+    - cron: 0 3 * * *
 
 jobs:
   auth-filter-upload:
