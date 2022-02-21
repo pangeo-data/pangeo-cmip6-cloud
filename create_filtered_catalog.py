@@ -6,7 +6,9 @@ import pandas as pd
 
 
 # first get the total number of results
-url = "https://esgf-data.dkrz.de/esg-search/search"
+# url = "https://esgf-data.dkrz.de/esg-search/search"
+# suggestion from @durack1 for more reliable search (https://github.com/pangeo-data/pangeo-cmip6-cloud/issues/30#issuecomment-1045620838)
+url = "https://esgf-node.llnl.gov/esg-search/search"
 params = {
     "type": "Dataset",
     "mip_era": "CMIP6",
