@@ -2,8 +2,7 @@ from tqdm.autonotebook import tqdm
 import requests
 import json
 
-
-def query_retraction(url: str, params: dict[str, str]) -> list[str]:
+def query_retraction(url, params):
     resp = requests.get(url=url, params=params)
     header = resp.json()  # Check the JSON Response Content documentation below
     n_items = header["response"]["numFound"]
