@@ -12,6 +12,8 @@ catalog_url = "https://cmip6.storage.googleapis.com/pangeo-cmip6.csv"
 node_urls = [
 "https://esgf-node.llnl.gov/esg-search/search",
 "https://esgf-data.dkrz.de/esg-search/search",
+"https://esgf-data1.ceda.ac.uk/esg-search/search",
+"https://esgf-node.ipsl.upmc.fr/esg-search/search",
 ]
 
 params = {
