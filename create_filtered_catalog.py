@@ -51,7 +51,7 @@ gcs.put_file(local_filename, f'cmip6/{backup_filename}')
 os.remove(local_filename)
 # check backup
 backup_df = pd.read_csv(f"https://cmip6.storage.googleapis.com/{backup_filename}")
-print('Backed up catalog has {len(backup_df)} items')
+print(f'Backed up catalog has {len(backup_df)} items')
 
 
 
