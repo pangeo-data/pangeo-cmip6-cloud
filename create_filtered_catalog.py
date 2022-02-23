@@ -2,6 +2,7 @@ import gcsfs
 import pandas as pd
 import os
 
+from functools import reduce
 from tqdm.autonotebook import tqdm
 from datetime import date
 from retractions import query_retraction_retry
