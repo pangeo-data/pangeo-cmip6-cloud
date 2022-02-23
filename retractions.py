@@ -1,13 +1,12 @@
 from tqdm.autonotebook import tqdm
 import requests
 import json
+import time
 
-def query_retraction(url, params):
+def query_retraction(url, params, batchsize):
     resp = requests.get(url=url, params=params)
     header = resp.json()  # Check the JSON Response Content documentation below
     n_items = header["response"]["numFound"]
-
-    batchsize = 5000
 
     batches = range(0, n_items+1, batchsize)  # if I offset these, can
     params["limit"] = batchsize
@@ -27,7 +26,7 @@ def query_retraction(url, params):
     # Convert to list of instance ids
     print("Extracting instance_ids...")
     all_retracted_instance_ids = []
-    for data in tqdm(batch_jsons):
+    for data in batch_jsons:
         extracted = [i["instance_id"] for i in data["response"]["docs"]]
         all_retracted_instance_ids.extend(extracted)
 
@@ -45,3 +44,15 @@ def query_retraction(url, params):
     retracted_instance_ids = set(all_retracted_instance_ids)
     print(f"{len(all_retracted_instance_ids)-len(retracted_instance_ids)} replicas found")
     return retracted_instance_ids
+
+def query_retraction_retry(url, params, batchsize = 10000):
+    """Retrys query if it fails"""
+    status = 0
+    while status == 0:
+        try:
+            query_result = query_retraction(url, params, batchsize)
+            status = 1
+        except RuntimeError as e:
+            print(f"{e}.\nRetrying")
+    
+    return query_result
