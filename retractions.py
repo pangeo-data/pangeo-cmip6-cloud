@@ -4,16 +4,18 @@ import json
 import time
 
 def query_retraction(url, params, batchsize):
+    print(f"Downloading Retraction Data from {url}...")
     resp = requests.get(url=url, params=params)
     header = resp.json()  # Check the JSON Response Content documentation below
     n_items = header["response"]["numFound"]
+    print(f"Found {n_items} items.")
 
     batches = range(0, n_items+1, batchsize)  # if I offset these, can
     params["limit"] = batchsize
 
     batch_jsons = []
 
-    print(f"Downloading Retraction Data from {url}...")
+    
     for batch in tqdm(batches):
         params["offset"] = batch
         resp = requests.get(url=url, params=params)
