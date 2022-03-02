@@ -39,10 +39,25 @@ retracted_ids_df = {k:pd.Series(list(v)).to_frame(name="instance_id") for k,v in
 # from https://stackoverflow.com/a/44338256
 retracted_df = reduce(lambda  left,right: pd.merge(left,right,on=['instance_id'],how='outer'), retracted_ids.values())
 
-## 
-pangeo_df = pd.read_csv(catalog_url)
+## document missing instances for each node
+print('Documenting missing instance_ids per node')
+def unique_instances(df, df_full):
+    df_merged = pd.merge(df, df_full, on=['instance_id'],how='outer', indicator=True)
+    df_merged = df_merged[df_merged['_merge']=='right_only']
+    df_merged = df_merged.drop(columns=['_merge'])
+    return df_merged
 
+missing_ids = {k: unique_instances(v, retracted_ids_merged) for k,v in retracted_ids.items()}
+
+for k,v in missing_ids.items():
+    print(f"Found {len(v)} missing instances from the {k} node.")
+    filename = f"missing_instance_ids_{k}.csv"
+    v['instance_id'].to_csv(filename, index=False)
+    print(f"Missing instance_ids written to {filename}")
+
+## 
 print('Backing up catalog')
+pangeo_df = pd.read_csv(catalog_url)
 local_filename = "local_catalog.csv"
 backup_filename = f"old_{date.today()}_pangeo-cmip6.csv"
 # create local file
