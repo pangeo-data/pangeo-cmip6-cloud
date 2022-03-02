@@ -37,7 +37,7 @@ retracted_ids_df = {k:pd.Series(list(v)).to_frame(name="instance_id") for k,v in
 
 # iteratively merge dataframes with 'outer' to get all possible retractions
 # from https://stackoverflow.com/a/44338256
-retracted_df = reduce(lambda  left,right: pd.merge(left,right,on=['instance_id'],how='outer'), retracted_ids.values())
+retracted_df = reduce(lambda  left,right: pd.merge(left,right,on=['instance_id'],how='outer'), list(retracted_ids.values()))
 
 ## document missing instances for each node
 print('Documenting missing instance_ids per node')
