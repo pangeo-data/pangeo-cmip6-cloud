@@ -23,3 +23,8 @@ jobs:
           pip install gcsfs tqdm pandas
       - id: 'upload-script'
         run: python create_filtered_catalog.py
+      - id: 'save-missing-instances'
+        uses: actions/upload-artifact@v2
+        with:
+          name: missing-instance-ids
+          path: missing_instance_ids_*.csv
