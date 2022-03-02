@@ -27,17 +27,17 @@ params = {
 }
 # query every one of the nodes
 retracted_ids = {
-    url :query_retraction_retry(
+     url.split('.')[1] :query_retraction_retry(
         url, params, batchsize=10000
     ) for url in node_urls
 }
 
 # convert to pandas dataframes
-retracted_ids_df = [pd.Series(list(v)).to_frame(name="instance_id") for v in retracted_ids.values()]
+retracted_ids_df = {k:pd.Series(list(v)).to_frame(name="instance_id") for k,v in retracted_ids.items()}
 
 # iteratively merge dataframes with 'outer' to get all possible retractions
 # from https://stackoverflow.com/a/44338256
-retracted_df = reduce(lambda  left,right: pd.merge(left,right,on=['instance_id'],how='outer'), retracted_ids_df)
+retracted_df = reduce(lambda  left,right: pd.merge(left,right,on=['instance_id'],how='outer'), retracted_ids.values())
 
 ## 
 pangeo_df = pd.read_csv(catalog_url)
