@@ -56,7 +56,7 @@ def unique_instances(df, df_full):
     df_merged = df_merged.drop(columns=['_merge'])
     return df_merged
 
-missing_ids = {k: unique_instances(v, retracted_df) for k,v in retracted_ids.items()}
+missing_ids = {k: unique_instances(v, retracted_df) for k,v in retracted_ids_df.items()}
 
 for k,v in missing_ids.items():
     print(f"Found {len(v)} missing instances from the {k} node.")
