@@ -93,21 +93,6 @@ recipe = XarrayZarrRecipe(
     xarray_concat_kwargs={"join": "exact"},
 )
 
-fs_local = LocalFileSystem()
-
-target_dir = tempfile.TemporaryDirectory().name + ".zarr"
-target = FSSpecTarget(fs_local, target_dir)
-
-cache_dir = tempfile.TemporaryDirectory()
-cache_target = CacheFSSpecTarget(fs_local, cache_dir.name)
-
-meta_dir = tempfile.TemporaryDirectory()
-meta_store = MetadataTarget(fs_local, meta_dir.name)
-
-recipe.target = target
-recipe.input_cache = cache_target
-recipe.metadata_cache = meta_store
-
 logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
     level=logging.INFO,
@@ -119,4 +104,4 @@ logger.setLevel(logging.INFO)
 
 recipe.to_function()()
 
-print(target_dir)
+print(recipe.target)
