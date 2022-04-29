@@ -20,6 +20,7 @@ author = "Pangeo Community"
 # extensions coming with Sphinx (named "sphinx.ext.*") or your custom
 # ones.
 extensions = [
+    "sphinxext.opengraph",
     #"myst_nb",
     #"sphinx.ext.autodoc",
     #"sphinx.ext.extlinks",
