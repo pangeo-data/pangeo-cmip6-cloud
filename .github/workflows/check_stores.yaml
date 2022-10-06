@@ -5,6 +5,9 @@ on:
 
 jobs:
   auth-check:
+    defaults:
+      run:
+        shell: bash -l {0}
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
@@ -21,7 +24,7 @@ jobs:
       - id: 'list-conda'
         run: conda list
       - id: 'upload-script'
-        run: conda activate test_stores; python check-open-stores.py
+        run: conda init bash;conda activate test_stores; python check-open-stores.py
       - id: 'save-error-report'
         uses: actions/upload-artifact@v2
         with:
