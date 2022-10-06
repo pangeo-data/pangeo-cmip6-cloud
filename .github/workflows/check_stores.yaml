@@ -12,19 +12,14 @@ jobs:
     permissions: write-all
     steps:
       - uses: actions/checkout@v2
-      - uses: conda-incubator/setup-miniconda@v2
+      - uses: actions/setup-python@v2
         with:
-          channels: conda-forge
-          mamba-version: '*'
-          channel-priority: strict
-          auto-update-conda: false
-          python-version: "3.9"
-          activate-environment: test_stores # Defined in environment.yml
-          environment-file: environment.yml
-      - id: 'list-conda'
-        run: conda list
+          python-version: '3.9'
+      - run: >
+          pip install gcsfs tqdm pandas
+          pip install gcsfs intake-esm xmip xarray zarr dask
       - id: 'upload-script'
-        run: conda init bash;conda activate test_stores; python check-open-stores.py
+        run: python check-open-stores.py
       - id: 'save-error-report'
         uses: actions/upload-artifact@v2
         with:
