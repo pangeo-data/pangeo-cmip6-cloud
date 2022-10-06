@@ -16,9 +16,8 @@ jobs:
           channel-priority: strict
           auto-update-conda: false
           python-version: "3.9"
-          use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
-      - run: >
-          mamba install gcsfs intake-esm xmip xarray zarr dask
+          activate-environment: test_stores # Defined in environment.yml
+          environment-file: environment.yml
       - id: 'upload-script'
         run: python check-open-stores.py
       - id: 'save-error-report'
