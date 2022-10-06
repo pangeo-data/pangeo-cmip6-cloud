@@ -23,19 +23,14 @@ def failcheck(store):
     except Exception as e:
         return (store, e)
     
-# b = db.from_sequence(stores, partition_size=25).map(failcheck)
+b = db.from_sequence(stores, partition_size=25).map(failcheck)
 
-# with ProgressBar():
-#     b_computed = list(b)
+with ProgressBar():
+    b_computed = list(b)
 
-b_computed = []
-for s in stores:
-    b_computed.append(failcheck(s))
-    
-# b = db.from_sequence(stores, partition_size=25).map(failcheck)
-
-# with ProgressBar():
-#     b_computed = list(b)
+# b_computed = []
+# for s in stores:
+#     b_computed.append(failcheck(s))
     
 fails = [b for b in b_computed if b[0] != 'success']
 
