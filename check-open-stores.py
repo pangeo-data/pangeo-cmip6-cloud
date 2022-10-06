@@ -38,3 +38,5 @@ if __name__ == '__main__':
     with open('report.txt', 'a') as file:
         for fail in fails:
             file.write(f"{','.join([str(f) for f in fail])}\n")
+            
+    print(f'Found {len(fails)} failed stores')
