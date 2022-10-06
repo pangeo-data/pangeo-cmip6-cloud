@@ -1,0 +1,23 @@
+name: check-open-all-stores-from-catalog
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  auth-filter-upload:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - run: >
+          pip install gcsfs tqdm pandas
+      - id: 'upload-script'
+        run: python check-open-stores.py
+      - id: 'save-error-report'
+        uses: actions/upload-artifact@v2
+        with:
+          name: report
+          path: report.txt
