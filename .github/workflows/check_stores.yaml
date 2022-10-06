@@ -13,7 +13,7 @@ jobs:
         with:
           python-version: '3.8'
       - run: >
-          pip install gcsfs tqdm pandas
+          pip install gcsfs intake-esm xmip xarray zarr dask
       - id: 'upload-script'
         run: python check-open-stores.py
       - id: 'save-error-report'
