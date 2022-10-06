@@ -9,8 +9,8 @@ if __name__ == '__main__':
     col = google_cmip_col()
     stores = col.df['zstore'].tolist()
 
-    # for testing
-    stores = [s for s in stores if 'CanESM' in s and 'thetao' in s and 'ssp126' in s]
+#     # for testing
+#     stores = [s for s in stores if 'CanESM' in s and 'thetao' in s and 'ssp126' in s]
 
 
     # Connect to Google Cloud Storage
