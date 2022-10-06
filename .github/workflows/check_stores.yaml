@@ -9,11 +9,16 @@ jobs:
     permissions: write-all
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: conda-incubator/setup-miniconda@v2
         with:
-          python-version: '3.8'
+          channels: conda-forge
+          mamba-version: '*'
+          channel-priority: strict
+          auto-update-conda: false
+          python-version: "3.9"
+          use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
       - run: >
-          pip install gcsfs intake-esm xmip xarray zarr dask
+          mamba install gcsfs intake-esm xmip xarray zarr dask
       - id: 'upload-script'
         run: python check-open-stores.py
       - id: 'save-error-report'
