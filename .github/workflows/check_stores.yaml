@@ -5,6 +5,7 @@ on:
 
 jobs:
   auth-check:
+    timeout-minutes: 360
     defaults:
       run:
         shell: bash -l {0}
