@@ -18,7 +18,7 @@ jobs:
           python-version: "3.9"
           activate-environment: test_stores # Defined in environment.yml
           environment-file: environment.yml
-      - id: 'list conda'
+      - id: 'list-conda'
         run: conda list
       - id: 'upload-script'
         run: python check-open-stores.py
