@@ -21,7 +21,7 @@ jobs:
       - id: 'upload-script'
         run: python check-open-stores.py
       - id: 'save-error-report'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: report
           path: report.txt
