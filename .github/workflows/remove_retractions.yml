@@ -16,7 +16,7 @@ jobs:
         uses: 'google-github-actions/auth@v0.6.0'
         with:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.8'
       - run: >
