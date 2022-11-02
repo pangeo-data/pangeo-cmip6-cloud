@@ -15,7 +15,7 @@ The Pangeo / ESGF Cloud Data Working Group is jointly chaired by:
 Meeting Schedule
 ----------------
 
-The working group meets every other Friday morning at 10am US ET.
+The working group meets once a month on Friday morning at 10am US ET.
 The link below will add the event to your Google Calendar.
 
 .. image:: https://www.google.com/calendar/images/ext/gc_button1_en.gif
