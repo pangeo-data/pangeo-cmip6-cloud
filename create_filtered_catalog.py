@@ -10,11 +10,11 @@ from retractions import query_retraction_retry
 gcs = gcsfs.GCSFileSystem()
 catalog_url = "https://cmip6.storage.googleapis.com/pangeo-cmip6.csv"
 node_urls = [
-"https://esgf-node.llnl.gov/esg-search",
-# "https://esgdata.gfdl.noaa.gov/esg-search/search", # Produces JSON error
+# "https://esgf-node.llnl.gov/esg-search", # removing the "/search" helped but I am getting connection errors
+"https://esgdata.gfdl.noaa.gov/esg-search",
 # "https://esgf-index1.ceda.ac.uk/esg-search/search",
 # "https://esgf-node.llnl.gov/esg-search/search",
-# "https://esgf-data.dkrz.de/esg-search/search",
+"https://esgf-data.dkrz.de/esg-search",
 # "https://esgf-node.ipsl.upmc.fr/esg-search/search",
 ]
 
