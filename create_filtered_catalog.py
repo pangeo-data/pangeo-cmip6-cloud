@@ -5,7 +5,7 @@ import os
 from functools import reduce
 from tqdm.autonotebook import tqdm
 from datetime import date
-from retraction import query_retraction
+from retractions import query_retraction
 
 gcs = gcsfs.GCSFileSystem()
 catalog_url = "https://cmip6.storage.googleapis.com/pangeo-cmip6.csv"
