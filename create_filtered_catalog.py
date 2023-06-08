@@ -5,23 +5,21 @@ import os
 from functools import reduce
 from tqdm.autonotebook import tqdm
 from datetime import date
-from retractions import query_retraction_retry
+from retraction import query_retraction
 
 gcs = gcsfs.GCSFileSystem()
 catalog_url = "https://cmip6.storage.googleapis.com/pangeo-cmip6.csv"
 node_urls = [
-# "https://esgf-node.llnl.gov/esg-search/search", # removing the "/search" helped but I am getting connection errors
-# "https://esgdata.gfdl.noaa.gov/esg-search", # errors out
-# "https://esgf-index1.ceda.ac.uk/esg-search/search",
-# "https://esgf-node.llnl.gov/esg-search/search",
+"https://esgf-node.llnl.gov/esg-search/search",
 "https://esgf-data.dkrz.de/esg-search/search",
-# "https://esgf-node.ipsl.upmc.fr/esg-search/search",
+"https://esgf-index1.ceda.ac.uk/esg-search/search",
+"https://esgf-node.ipsl.upmc.fr/esg-search/search",
 ]
 
 params = {
     "type": "Dataset",
     "mip_era": "CMIP6",
-    "replica": "false",
+    # "replica": "false", #FIXME: Somehow this still does not give me the same results from every node...very strange
     "distrib": "true",
     "retracted": "true",
     "format": "application/solr+json",
@@ -29,8 +27,8 @@ params = {
 }
 # query every one of the nodes
 retracted_ids = {
-     url.split('.')[1] :query_retraction_retry(
-        url, params, batchsize=5000
+     url.split('.')[1] :query_retraction(
+        url, params, batchsize=10000
     ) for url in node_urls
 }
 
