@@ -79,8 +79,6 @@ os.remove(local_filename)
 backup_df = pd.read_csv(f"https://cmip6.storage.googleapis.com/{backup_filename}")
 print(f'Backed up catalog has {len(backup_df)} items')
 
-
-
 # FILTER THE CURRENT CATALOG
 pangeo_df["instance_id"] = pangeo_df["zstore"].apply(
     lambda x: ".".join(x.replace("gs://cmip6/", "").split("/")[0:-1])
@@ -103,9 +101,9 @@ assert len(df_to_keep) + len(df_to_remove) == len(pangeo_df)
 # create local file
 df_to_keep.to_csv(local_filename, index=False)
 
-# upload that to the cloud
-print("Uploading filtered catalog")
-gcs.put_file(local_filename, "cmip6/pangeo-cmip6.csv")
+# # upload that to the cloud
+# print("Uploading filtered catalog")
+# gcs.put_file(local_filename, "cmip6/pangeo-cmip6.csv")
 
-new_df = pd.read_csv(catalog_url)
-print(f'Filtered catalog has {len(new_df)} items ({len(backup_df) - len(new_df)} less than before)')
+# new_df = pd.read_csv(catalog_url)
+# print(f'Filtered catalog has {len(new_df)} items ({len(backup_df) - len(new_df)} less than before)')
