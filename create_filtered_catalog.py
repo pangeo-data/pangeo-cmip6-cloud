@@ -10,11 +10,11 @@ from retractions import query_retraction_retry
 gcs = gcsfs.GCSFileSystem()
 catalog_url = "https://cmip6.storage.googleapis.com/pangeo-cmip6.csv"
 node_urls = [
-"https://esgf-node.llnl.gov/esg-search/search", # removing the "/search" helped but I am getting connection errors
+# "https://esgf-node.llnl.gov/esg-search/search", # removing the "/search" helped but I am getting connection errors
 # "https://esgdata.gfdl.noaa.gov/esg-search", # errors out
 # "https://esgf-index1.ceda.ac.uk/esg-search/search",
 # "https://esgf-node.llnl.gov/esg-search/search",
-# "https://esgf-data.dkrz.de/esg-search/search",
+"https://esgf-data.dkrz.de/esg-search/search",
 # "https://esgf-node.ipsl.upmc.fr/esg-search/search",
 ]
 
@@ -30,7 +30,7 @@ params = {
 # query every one of the nodes
 retracted_ids = {
      url.split('.')[1] :query_retraction_retry(
-        url, params, batchsize=10000
+        url, params, batchsize=5000
     ) for url in node_urls
 }
 
