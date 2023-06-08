@@ -10,10 +10,10 @@ from retractions import query_retraction
 gcs = gcsfs.GCSFileSystem()
 catalog_url = "https://cmip6.storage.googleapis.com/pangeo-cmip6.csv"
 node_urls = [
-# "https://esgf-node.llnl.gov/esg-search/search",
+"https://esgf-node.llnl.gov/esg-search/search",
 "https://esgf-data.dkrz.de/esg-search/search",
 # "https://esgf-index1.ceda.ac.uk/esg-search/search",
-# "https://esgf-node.ipsl.upmc.fr/esg-search/search",
+"https://esgf-node.ipsl.upmc.fr/esg-search/search",
 ]
 
 params = {
@@ -101,9 +101,9 @@ assert len(df_to_keep) + len(df_to_remove) == len(pangeo_df)
 # create local file
 df_to_keep.to_csv(local_filename, index=False)
 
-# # upload that to the cloud
-# print("Uploading filtered catalog")
-# gcs.put_file(local_filename, "cmip6/pangeo-cmip6.csv")
+# upload that to the cloud
+print("Uploading filtered catalog")
+gcs.put_file(local_filename, "cmip6/pangeo-cmip6.csv")
 
-# new_df = pd.read_csv(catalog_url)
-# print(f'Filtered catalog has {len(new_df)} items ({len(backup_df) - len(new_df)} less than before)')
+new_df = pd.read_csv(catalog_url)
+print(f'Filtered catalog has {len(new_df)} items ({len(backup_df) - len(new_df)} less than before)')
