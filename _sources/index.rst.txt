@@ -19,3 +19,4 @@ documentation for accessing the cloud data.
    pangeo_catalog
    licensing_citation
    presentation
+   requesting_data
