@@ -27,7 +27,7 @@ params = {
 # query every one of the nodes
 retracted_ids = {
      url.split('.')[1] :query_retraction_retry(
-        url, params, batchsize=5000
+        url, params, batchsize=10000
     ) for url in node_urls
 }
 
