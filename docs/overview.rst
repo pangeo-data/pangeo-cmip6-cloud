@@ -25,13 +25,24 @@ Python users are encouraged to use `xarray <https://xarray.pydata.org/en/stable/
 Data Locations
 --------------
 
+
 CMIP6 data in the cloud can be found in both Google Cloud and AWS S3 storage buckets:
 
 - ``gs://cmip6`` (part of `Google Cloud Public Datasets <https://cloud.google.com/public-datasets>`_)
 - ``s3://cmip6-pds`` (part of the `AWS Open Data Sponsorship Program <https://aws.amazon.com/opendata/public-datasets/>`_)
 
-The data is primarily `Zarr <https://zarr.readthedocs.io/en/stable/>`_-formatted, with a predetermined and well-defined directory structure to ensure that it is properly organized and classified.
-This directory structure is reflected in the master CSV files located at the root of each bucket, which enumerates all available Zarr stores using their containing directory names as columns to allow for sorting and filtering.
+.. warning::
+   The AWS S3 storage copy mechanism is currently broken and thus data might be out of sync. 
+   Progress on reimplementing a sync between buckets is tracked  `here <https://github.com/leap-stc/cmip6-leap-feedstock/issues/134>`_.
+
+The `Zarr <https://zarr.readthedocs.io/en/stable/>`_-formatted data is currently ingested using `Pangeo-Forge <https://pangeo-forge.org>`_ recipes as part of the `NSF LEAP Project <https://leap.columbia.edu>`_ (`more info <https://github.com/leap-stc/cmip6-leap-feedstock>`_)
+
+The base organization of Zarr stores is reflected in the master CSV files located at the root of each bucket, which enumerates all available Zarr stores and their facets (components of the instance_id) to allow for sorting and filtering.
+
+.. warning::
+   **Parts of the information below is superseeded by the new `Pangeo-ESGF CMIP6 Zarr Data 2.0` (currently in Beta testing)**
+   Please refer to the `repository <https://github.com/leap-stc/cmip6-leap-feedstock/>`_ for up to date information, particularly how to `access new data <https://github.com/leap-stc/cmip6-leap-feedstock#how-to-access-the-newly-uploaded-data>`_ and `request new data to be ingested <https://github.com/leap-stc/cmip6-leap-feedstock#how-can-i-request-new-data>`_.
+   This page will be updated once the `beta testing phase is complete <https://github.com/leap-stc/cmip6-leap-feedstock/issues/135>`_.
 
 Zarr storage format
 -------------------
