@@ -42,7 +42,7 @@ The base organization of Zarr stores is reflected in the master CSV files locate
 .. warning::
    **Parts of the information below is superseeded by the new `Pangeo-ESGF CMIP6 Zarr Data 2.0` (currently in Beta testing)**
    Please refer to the `repository <https://github.com/leap-stc/cmip6-leap-feedstock/>`_ for up to date information, particularly how to `access new data <https://github.com/leap-stc/cmip6-leap-feedstock#how-to-access-the-newly-uploaded-data>`_ and `request new data to be ingested <https://github.com/leap-stc/cmip6-leap-feedstock#how-can-i-request-new-data>`_.
-   This page will be updated once the `beta testing phase is complete <https://github.com/leap-stc/cmip6-leap-feedstock#how-can-i-request-new-data>`_.
+   This page will be updated once the `beta testing phase is complete <https://github.com/leap-stc/cmip6-leap-feedstock/issues/135>`_.
 
 Zarr storage format
 -------------------
