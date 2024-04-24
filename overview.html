@@ -9,12 +9,7 @@
 <meta property="og:url" content="overview.html" />
 <meta property="og:site_name" content="Pangeo / ESGF Cloud Data Working Group" />
 <meta property="og:description" content="Requirements: First and foremost, a Zarr package is required to interact with the data stores. Listed below are languages with actively developed Zarr packages; bolded languages do not yet have Zar..." />
-<meta property="og:image:width" content="1146" />
-<meta property="og:image:height" content="600" />
-<meta property="og:image" content="/_images/social_previews/summary_overview_c27660e0.png" />
-<meta property="og:image:alt" content="Requirements: First and foremost, a Zarr package is required to interact with the data stores. Listed below are languages with actively developed Zarr packag..." />
 <meta name="description" content="Requirements: First and foremost, a Zarr package is required to interact with the data stores. Listed below are languages with actively developed Zarr packages; bolded languages do not yet have Zar..." />
-<meta name="twitter:card" content="summary_large_image" />
 
     <title>Zarr Data Overview &#8212; Pangeo / ESGF Cloud Data Working Group  documentation</title>
     
@@ -252,17 +247,17 @@
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
+    <a class="reference internal nav-link" href="#id2">
      Data locations
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
+    <a class="reference internal nav-link" href="#id5">
      Directory structure
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
+    <a class="reference internal nav-link" href="#id7">
      CSV File Structure
     </a>
    </li>
@@ -309,8 +304,19 @@ Python users are encouraged to use <a class="reference external" href="https://x
 <li><p><code class="docutils literal notranslate"><span class="pre">gs://cmip6</span></code> (part of <a class="reference external" href="https://cloud.google.com/public-datasets">Google Cloud Public Datasets</a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">s3://cmip6-pds</span></code> (part of the <a class="reference external" href="https://aws.amazon.com/opendata/public-datasets/">AWS Open Data Sponsorship Program</a>)</p></li>
 </ul>
-<p>The data is primarily <a class="reference external" href="https://zarr.readthedocs.io/en/stable/">Zarr</a>-formatted, with a predetermined and well-defined directory structure to ensure that it is properly organized and classified.
-This directory structure is reflected in the master CSV files located at the root of each bucket, which enumerates all available Zarr stores using their containing directory names as columns to allow for sorting and filtering.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The AWS S3 storage copy mechanism is currently broken and thus data might be out of sync.
+Progress on reimplementing a sync between buckets is tracked  <a class="reference external" href="https://github.com/leap-stc/cmip6-leap-feedstock/issues/134">here</a>.</p>
+</div>
+<p>The <a class="reference external" href="https://zarr.readthedocs.io/en/stable/">Zarr</a>-formatted data is currently ingested using <a class="reference external" href="https://pangeo-forge.org">Pangeo-Forge</a> recipes as part of the <a class="reference external" href="https://leap.columbia.edu">NSF LEAP Project</a> (<a class="reference external" href="https://github.com/leap-stc/cmip6-leap-feedstock">more info</a>)</p>
+<p>The base organization of Zarr stores is reflected in the master CSV files located at the root of each bucket, which enumerates all available Zarr stores and their facets (components of the instance_id) to allow for sorting and filtering.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Parts of the information below is superseeded by the new `Pangeo-ESGF CMIP6 Zarr Data 2.0` (currently in Beta testing)</strong>
+Please refer to the <a class="reference external" href="https://github.com/leap-stc/cmip6-leap-feedstock/">repository</a> for up to date information, particularly how to <a class="reference external" href="https://github.com/leap-stc/cmip6-leap-feedstock#how-to-access-the-newly-uploaded-data">access new data</a> and <a class="reference external" href="https://github.com/leap-stc/cmip6-leap-feedstock#how-can-i-request-new-data">request new data to be ingested</a>.
+This page will be updated once the <a class="reference external" href="https://github.com/leap-stc/cmip6-leap-feedstock#how-can-i-request-new-data">beta testing phase is complete</a>.</p>
+</div>
 </div>
 <div class="section" id="zarr-storage-format">
 <h2>Zarr storage format<a class="headerlink" href="#zarr-storage-format" title="Permalink to this headline">¶</a></h2>
@@ -390,8 +396,8 @@ The data are now structured in this cloud repository using 9 of these keywords i
 </div>
 <div class="section" id="netcdf-data-overview">
 <h1>NetCDF Data Overview<a class="headerlink" href="#netcdf-data-overview" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="id1">
-<h2>Data locations<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>Data locations<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>CMIP6 netcdf data in the cloud can be found in AWS S3 storage.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">s3://esgf-world</span></code> (part of the <a class="reference external" href="https://aws.amazon.com/opendata/`_public-datasets/">AWS Open Data Sponsorship Program</a>).</p></li>
@@ -399,8 +405,8 @@ The data are now structured in this cloud repository using 9 of these keywords i
 <p>The data is in NetCDF format, with a predetermined and well-defined directory structure to ensure that it is properly organized and classified. This directory structure is reflected in the CSV files located <a class="reference external" href="https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz">here</a>, which enumerates all available netcdf datasets using their containing directory names as columns to allow for sorting and filtering.The names of the columns adhere to the CMIP6 controlled vocabulary whenever  available. One can use the <a class="reference external" href="https://esgf-world.s3.amazonaws.com/index.html">AWS S3 explorer</a> to quickly explore these data holdings.</p>
 <p>These datasets are also linked from the <a class="reference external" href="https://registry.opendata.aws/cmip6/">AWS registry of open data on AWS</a>.</p>
 </div>
-<div class="section" id="id4">
-<h2>Directory structure<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h2>Directory structure<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>The directory structure (or the prefixes) adhere to the CMIP6 Data Reference Syntax and CMIP6 Controlled Vocabulary to facilitate building of automated tools to build data catalogs and other utilities to aid in data analysis.</p>
 <p>Here is an example: <code class="docutils literal notranslate"><span class="pre">s3://esgf-world/CMIP6/AerChemMIP/NOAA-GFDL/GFDL-ESM4/hist-piNTCF/r1i1p1f1/Amon/tas/gr1/v20180701/tas_Amon_GFDL-ESM4_hist-piNTCF_r1i1p1f1_gr1_185001-194912.nc</span></code> (appears as the column path in the CSV file located <a class="reference external" href="https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz">here</a>)</p>
 <p>where:</p>
@@ -420,8 +426,8 @@ The data are now structured in this cloud repository using 9 of these keywords i
 </ul>
 <p>More CMIP6 netcdf data is being added incrementally to the S3 storage bucket, through a cloud based experimental Earth System Grid Federation (ESGF) node.</p>
 </div>
-<div class="section" id="id6">
-<h2>CSV File Structure<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h2>CSV File Structure<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="https://cmip6-nc.s3.amazonaws.com/esgf-world.csv.gz">CSV file</a>), also known as the intake-esm catalog is a  CSV file listing the netcdf objects in the esgf-world bucket, providing the keyword values in columns as well as the dataset URLs and some additional information. The column names use CMIP6 controlled vocabulary as indicated in the section above. These files allow for rapid searching by keyword using your favorite spreadsheet software. For example, in python, we generally use the pandas package. If you’d like to use them in your data analysis directly, you can also leverage xarray and dask. An example can be found <a class="reference external" href="https://github.com/aradhakrishnanGFDL/gfdl-aws-analysis/blob/community/examples/intake-esm-s3-nc-simple-access.ipynb">here</a>.</p>
 </div>
 </div>
@@ -456,7 +462,7 @@ The data are now structured in this cloud repository using 9 of these keywords i
         
           By Pangeo Community<br/>
         
-            &copy; Copyright 2019-2023, Pangeo Community.<br/>
+            &copy; Copyright 2019-2024, Pangeo Community.<br/>
       </p>
     </div>
   </footer>
